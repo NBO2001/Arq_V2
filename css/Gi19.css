@@ -1,0 +1,33 @@
+body{
+  background-color: #E8E8E8;
+}
+#logoufam{
+  background-color: #008B45;
+  color:white;
+}
+#pgini1{
+background-color: #E8E8E8;
+}
+input[type=submit]{
+  background-color: #F5F5DC;
+  color:#000000;
+}
+select{
+  background-color: #F5F5DC;
+  color:#000000;
+}
+button{
+  background-color: #F5F5DC;
+  color:#000000;
+}
+.bntv1{
+  background-color: #F5F5DC;
+  color:#000000;
+}
+#resuupmul p{
+	color: black;
+}
+#resuupmul p:hover{
+	background-color: #F5F5DC;
+	color: black;
+}
