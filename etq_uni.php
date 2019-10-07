@@ -42,8 +42,6 @@ $tabela = "<tr>
 
 $tabela ="<table><tbody>".$tabela."</tbody></table>";
 
-
-
 ?>
 
 <?php

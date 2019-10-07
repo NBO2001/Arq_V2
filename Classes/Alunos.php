@@ -44,10 +44,10 @@ function getNome_cur(){
   function getSistema(){
     return $this->sistema;
   }
-  function pesquisa_banco(){
+  function pesquisa_banco($ma){
     $pdo = new PDO( 'mysql:host=localhost;dbname=Al', 'root', '' );
     $pdo -> query("SET NAMES UTF8");
-    $stmt = $pdo->prepare("SELECT *,COUNT(*) FROM Alunos WHERE Num_mat LIKE '$this->matricula%'");
+    $stmt = $pdo->prepare("SELECT *,COUNT(*) FROM Alunos WHERE Num_mat LIKE '$ma%'");
     $stmt->execute(array('id','Cod_cur','Num_mat','Nome_civil','Nome_cur','Fin','Fev','Ain','Aev','sistema','Nome_social','COUNT(*)'));
     $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
       foreach($resultado as $item){

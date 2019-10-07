@@ -79,6 +79,9 @@ include_once 'ConAL.php';
        <li><a href="alterar_senha.php">Alterar senha</a></li>
      <li><a href="altera_tema.php">Alterar tema</a></li>
      <?php
+     if ($_SESSION['acesso']>=2){
+       echo "<li><a href='mult_etq.php'>Gerar etiquetas</a></li>";
+     }
     if ($_SESSION['acesso']==4){
       echo "<li><a href='multup.php'>Adicionar documentos</a></li>";
        echo "<li><a href='ad_registro.php'>Adicionar registro</a></li>";

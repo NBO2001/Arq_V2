@@ -18,7 +18,7 @@ if(isset($_GET['alid'])){
   $ma = preg_replace("/\s+/","",$ma);
   $al = new Aluno();
   $al -> setMatricula($ma);
-  $al->pesquisa_banco();
+  $al->pesquisa_banco($ma);
 }
 ?>
 <!DOCTYPE html>
