@@ -29,7 +29,17 @@ if(isset($sre)){
   $inse = $pdo->prepare("$sql");
   if($inse->execute()){
    header("Location:tela_inicial.php");
-    $_SESSION['ifon']="<script>alert('Mensagen enviada com sucesso')</script>";
+   $solicitacao = explode('.',$solicitacao);
+   $solicitacao = $solicitacao[0];
+   $solicitacao = substr($solicitacao, 0,3);
+   $data=date('Y')-11;
+   $rest = substr($data, 0,1).substr($data, 2,2);
+
+   if($solicitacao<=$rest){
+     $_SESSION['ifon']="<script>alert('Pasta física localizada no arquivo sul a resposta poderá demorar alguns dias')</script>";
+   }else{
+     $_SESSION['ifon']="<script>alert('Mensagen enviada com sucesso')</script>";
+   }
     die;
   }else{
     header("Location:tela_inicial.php");

@@ -42,12 +42,20 @@ $_SESSION['ifon'] = "<script>alert('Nenhum registro localizado!!')</script>";
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="css/es.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="pdf.js"></script>
+<script src="pdf.worker.js"></script>
+
 <?php
 if($_COOKIE["tema"] <> "a"){
   echo "<link rel='stylesheet' type='text/css' href='css/$tema.css'>";
 }
 
 ?>
+<style type="text/css">
+
+
+</style>
 <title>Inserir</title>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 </head>
@@ -88,11 +96,9 @@ if($_COOKIE["tema"] <> "a"){
 </div>
 
 <div id="formulario_envia_doc">
-
+<button id="upload-button">Selecione o arquivo pdf</button>
 <form method="Post" action="envia_banco.php" enctype="multipart/form-data">
-  <label>Selecione o arquivo:</label><br><br>
-  <input id="arq" type="file" name="pdf" required><br><br>
-
+  <input id="file-to-upload" type="file" accept="application/pdf" name="pdf" required>
   <label>Tipo de documento:</label><br><br>
   <select name="sele">
     <option>Ficha Cadastral</option>
@@ -102,6 +108,7 @@ if($_COOKIE["tema"] <> "a"){
     <option>Histórico Escolar</option>
     <option>Outro tipo de Ficha</option>
     <option>Ofício</option>
+    <option>Formulário de correção de notas e faltas</option>
   </select><br><br>
 
   <label>Classificação do documento:&nbsp;</label><br><br>
@@ -113,14 +120,28 @@ if($_COOKIE["tema"] <> "a"){
 
 
 <label>Ano do documento:&nbsp;</label><br><br>
-<input id="ano" name="ano" value="<?php $data=date('Y-m-d');$par = explode('-',$data); echo $par[0]; ?>" type="number" min="1900" max="<?php $data=date('Y-m-d');$par = explode('-',$data); echo $par[0]; ?>" required>
+<input id="ano" name="ano" value="<?php $data=date('Y'); echo $data ?>" type="number" min="1900" max="<?php echo $data; ?>" required>
 
 <br><br><input name="sand" type="submit" value="Cadastrar">
 
 </form>
-<form action="pg_res_pes_mat.php">
-<input name="sand" type="submit" value="Voltar">
-</form>
+
+
+<div id="pdf-main-container">
+  <div id="pdf-loader">Carregando documento ...</div>
+  <div id="pdf-contents">
+    <div id="pdf-meta">
+      <div id="pdf-buttons">
+        <button id="pdf-prev">Voltar</button><br><br>
+        <button id="pdf-next">Avançar</button>
+      </div>
+  </div>
+    <canvas id="pdf-canvas" width="500"></canvas>
+    <div id="page-loader">Carregando pagina ...</div>
+  </div>
+</div>
+
+<button onclick="window.location.href='pg_res_pes_mat.php?alid=<?php echo $id;?>'">Voltar</button><br><br>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -131,6 +152,112 @@ if($_COOKIE["tema"] <> "a"){
             source: 'proc_pesq_msg.php'
         });
     });
+</script>
+<script>
+
+var __PDF_DOC,
+	__CURRENT_PAGE,
+	__TOTAL_PAGES,
+	__PAGE_RENDERING_IN_PROGRESS = 0,
+	__CANVAS = $('#pdf-canvas').get(0),
+	__CANVAS_CTX = __CANVAS.getContext('2d');
+
+function showPDF(pdf_url) {
+	$("#pdf-loader").show();
+
+	PDFJS.getDocument({ url: pdf_url }).then(function(pdf_doc) {
+		__PDF_DOC = pdf_doc;
+		__TOTAL_PAGES = __PDF_DOC.numPages;
+
+		// Hide the pdf loader and show pdf container in HTML
+		$("#pdf-loader").hide();
+		$("#pdf-contents").show();
+		$("#pdf-total-pages").text(__TOTAL_PAGES);
+
+		// Show the first page
+		showPage(1);
+	}).catch(function(error) {
+		// If error re-show the upload button
+		$("#pdf-loader").hide();
+		$("#upload-button").show();
+
+		alert(error.message);
+	});;
+}
+
+function showPage(page_no) {
+	__PAGE_RENDERING_IN_PROGRESS = 1;
+	__CURRENT_PAGE = page_no;
+
+	// Disable Prev & Next buttons while page is being loaded
+	$("#pdf-next, #pdf-prev").attr('disabled', 'disabled');
+
+	// While page is being rendered hide the canvas and show a loading message
+	$("#pdf-canvas").hide();
+	$("#page-loader").show();
+
+	// Update current page in HTML
+	$("#pdf-current-page").text(page_no);
+
+	// Fetch the page
+	__PDF_DOC.getPage(page_no).then(function(page) {
+		// As the canvas is of a fixed width we need to set the scale of the viewport accordingly
+		var scale_required = __CANVAS.width / page.getViewport(1).width;
+
+		// Get viewport of the page at required scale
+		var viewport = page.getViewport(scale_required);
+
+		// Set canvas height
+		__CANVAS.height = viewport.height;
+
+		var renderContext = {
+			canvasContext: __CANVAS_CTX,
+			viewport: viewport
+		};
+
+		// Render the page contents in the canvas
+		page.render(renderContext).then(function() {
+			__PAGE_RENDERING_IN_PROGRESS = 0;
+
+			// Re-enable Prev & Next buttons
+			$("#pdf-next, #pdf-prev").removeAttr('disabled');
+
+			// Show the canvas and hide the page loader
+			$("#pdf-canvas").show();
+			$("#page-loader").hide();
+		});
+	});
+}
+
+// Upon click this should should trigger click on the #file-to-upload file input element
+// This is better than showing the not-good-looking file input element
+$("#upload-button").on('click', function() {
+	$("#file-to-upload").trigger('click');
+});
+
+// When user chooses a PDF file
+$("#file-to-upload").on('change', function() {
+	// Validate whether PDF
+    if(['application/pdf'].indexOf($("#file-to-upload").get(0).files[0].type) == -1) {
+        alert('Error : Not a PDF');
+        return;
+    }
+	// Send the object url of the pdf
+	showPDF(URL.createObjectURL($("#file-to-upload").get(0).files[0]));
+});
+
+// Previous page of the PDF
+$("#pdf-prev").on('click', function() {
+	if(__CURRENT_PAGE != 1)
+		showPage(--__CURRENT_PAGE);
+});
+
+// Next page of the PDF
+$("#pdf-next").on('click', function() {
+	if(__CURRENT_PAGE != __TOTAL_PAGES)
+		showPage(++__CURRENT_PAGE);
+});
+
 </script>
 </body>
 </html>

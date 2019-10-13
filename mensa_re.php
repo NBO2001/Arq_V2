@@ -60,11 +60,12 @@ if($_COOKIE["tema"] <> "a"){
 <table style="position:absolute;top:0px;" id='minhaTabela'>
    <thead>
         <tr>
-             <th>ID</th>
+             <th style="display:none;">ID</th>
              <th>Setor</th>
              <th>Solicitante</th>
              <th>Solicitação</th>
              <th>Observação</th>
+             <th>Arquivo</th>
 
         <tr>
    </thead>
@@ -73,15 +74,25 @@ if($_COOKIE["tema"] <> "a"){
      while($row_usuario = mysqli_fetch_array($resultado_usuario)){
      ?>
         <tr>
-             <td><?php echo $row_usuario['id'];?></td>
+             <td style="display:none;"><?php echo $row_usuario['id'];?></td>
              <td><?php echo $row_usuario['setor']; ?></td>
              <td><?php echo $row_usuario['soli']; ?></td>
              <td><?php echo $row_usuario['solicitacao']; ?></td>
              <td><?php echo $row_usuario['obv']; ?></td>
+            <td><?php
+            $solicitacao = $row_usuario['solicitacao'];
+            $solicitacao = substr($solicitacao, 0,3);
+            $data=date('Y')-11;
+            $rest = substr($data, 0,1).substr($data, 2,2);
+            if($solicitacao<=$rest){
+              $loc="SUL";
+            }else{
+            $loc="NORTE";
+          }
+             echo $loc; ?></td>
 
-             </tr>
            <?php } ?>
-
+            </tr>
    </tbody>
 </table>
 </div>

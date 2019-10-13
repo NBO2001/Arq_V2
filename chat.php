@@ -8,8 +8,8 @@ while($resubank = mysqli_fetch_array($rexea)){
   $res = $resubank['uso'].":".$resubank['msg'];
   $res = explode('#',$res);
   if(isset($res[1])){
-    $kval ="*".$res[1];
-  $res ="<a href='redir_mesn.php?texto=$kval'>". $resubank['uso'].":".$resubank['msg']."</a></n>";
+    $kval =$res[1];
+  $res ="<a href='pg_res_pes_mat.php?matri=$kval'>". $resubank['uso'].":".$resubank['msg']."</a></n>";
   }else{
     $res = $resubank['uso'].":".$resubank['msg']."<br>";
   }

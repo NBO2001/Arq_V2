@@ -704,6 +704,7 @@ border-radius: 15px;
 	width: 100%;
   margin:0 auto;
   border:0;
+	text-align: left;
 	top:25px;
   box-shadow: 0 5px 30px darkgrey;
   border-spacing: 0;
@@ -722,7 +723,8 @@ border-radius: 15px;
 #minhaTabela tr td{
 	font-size: 20px;
   padding:5px 10px;
-  text-align: center;
+
+  text-align: left;
 
   cursor: pointer; /**importante para não mostrar cursor de texto**/
 }
@@ -861,7 +863,7 @@ font-size: 50px;
 	position: absolute;
 	text-align: center;
 	top:230px;
-	left:10%;
+	left:0%;
 }
 #formulario_envia_doc form{
 	font-size: 25px;
@@ -869,6 +871,15 @@ font-size: 50px;
 }
 #formulario_envia_doc input{
 	width:90%;
+		height:40px;
+		font-size: 20px;
+		text-align: center;
+		border: 1px solid black;
+		border-radius: 25px;
+		padding: 5px 5px;
+}
+#formulario_envia_doc button{
+		width:90%;
 		height:40px;
 		font-size: 20px;
 		text-align: center;
@@ -957,6 +968,69 @@ padding: 5px 5px;
 
 
 
+}
+#upload-button {
+	width: 150px;
+	display: block;
+	margin: 20px auto;
+}
+
+#file-to-upload {
+	display: none;
+}
+
+
+
+#pdf-loader {
+	display: none;
+	text-align: center;
+	color: #999999;
+	font-size: 13px;
+	line-height: 100px;
+	height: 100px;
+}
+
+#pdf-contents {
+	display: none;
+}
+
+#pdf-meta {
+	overflow: hidden;
+	margin: 0 0 20px 0;
+}
+#page-count-container {
+	float: right;
+}
+
+#pdf-current-page {
+	display: inline;
+}
+
+#pdf-total-pages {
+	display: inline;
+}
+
+#pdf-canvas {
+	border: 1px solid rgba(0,0,0,0.2);
+	box-sizing: border-box;
+	position: absolute;
+	left: 0%;
+}
+
+#page-loader {
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+	display: none;
+	color: #999999;
+	font-size: 13px;
+}
+#pdf-main-container {
+  position: absolute;
+  left:830px;
+  top:0px;
+	width: 500px;
+	margin: 20px auto;
 }
 
 @media (max-width: 1000px) {

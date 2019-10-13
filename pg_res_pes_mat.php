@@ -14,8 +14,14 @@ if(isset($_GET['alid'])){
   $al->pesquisa_banco2($_GET['alid']);
 
 }else{
-  $ma = filter_input(INPUT_POST,'nume');
-  $ma = preg_replace("/\s+/","",$ma);
+  if(isset($_GET['matri'])){
+    $ma = $_GET['matri'];
+    $ma = preg_replace("/\s+/","",$ma);
+  }else{
+    $ma = filter_input(INPUT_POST,'nume');
+    $ma = preg_replace("/\s+/","",$ma);
+  }
+
   $al = new Aluno();
   $al -> setMatricula($ma);
   $al->pesquisa_banco($ma);
@@ -160,7 +166,7 @@ if("<?php echo $_SESSION['acesso'];?>" == 4){
     modal: true,
     buttons: {
         'Visualizar': function() {
-          $( window.open('apagar_documento.php?id='+d,'_blank') ).dialog( 'close ');
+          $( window.open('pdf_visu.php?id='+d,'_blank') ).dialog( 'close ');
         },
         Cancel: function() {
           $( this ).dialog( 'close' );

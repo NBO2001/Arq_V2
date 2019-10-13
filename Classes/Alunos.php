@@ -91,6 +91,17 @@ function getNome_cur(){
   }
   function exibir(){
     if($this->cont == 1){
+
+      $loc = substr($this->Num_mat, 0,3);
+      $data=date('Y')-11;
+      $rest = substr($data, 0,1).substr($data, 2,2);
+
+      if($loc<=$rest){
+        $loc = "PASTA FÍSICA LOCALIZADA NO ARQUIVO SUL";
+      }else{
+        $loc = "PASTA FÍSICA LOCALIZADA NO ARQUIVO NORTE";
+      }
+
       echo "<div id='dadosal'>
       <label style='color:#FE642E;' >Nome civil: &nbsp</label>
       <label> $this->Nome_civil </label><br>
@@ -111,6 +122,7 @@ function getNome_cur(){
       <label>$this->Aev&nbsp&nbsp | &nbsp</label>
       <label style='color:#FE642E';>Dados retirados do: &nbsp</label>
       <label>$this->sistema</label><br>
+      <label style='font-size: 11px;'>$loc</label>
       </div>";
     }else{
       echo "<script>window.location.href='psq_nome.php?nun=$this->matricula'</script>";
