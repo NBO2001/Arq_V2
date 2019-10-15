@@ -106,7 +106,7 @@ if(isset($tabelat[$ab+3])){
   $am4 = $tabelat[$ab+3];
 }
 
-$tabela =$tabela."<table>".$am1.$am2.$am3.$am4."</table><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+$tabela =$tabela."<table>".$am1.$am2.$am3.$am4."</table>";
 $ab = $ab + 5;
 }
 
@@ -182,7 +182,7 @@ $arquivoLocal = '/opt/lampp/htdocs/Arq_V2/'.$arquivo;
 if (!file_exists($arquivoLocal)) {
 exit;
 }
-$novoNome = 'Etq_geradas.html';
+$novoNome = 'Etq_geradas.xlsx';
 header('Content-Description: File Transfer');
 header('Content-Disposition: attachment; filename="'.$novoNome.'"');
 header('Content-Type: application/octet-stream');
