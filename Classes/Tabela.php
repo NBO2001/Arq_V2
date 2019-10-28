@@ -64,10 +64,12 @@ function exibir_dados(){
         <option>Ficha Cadastral </option>
         <option >Processo</option>
         <option >Requerimento</option>
-        <option >TCE</option>
+        <option >TERMO DE COMPROMISSO DE ESTÁGIO (TCE)</option>
         <option >Histórico Escolar</option>
-        <option >Outro tipo de ficha</option>
+        <option >FICHA</option>
         <option >Ofício</option>
+        <option>Formulário de correção de notas e faltas</option>
+        <option>MEMORANDO</option>
       </select><br><br>
       <label>Descrição: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
       <input type='text' name='descricao' value='$this->no' placeholder='Descreva a modificação'><br><br>

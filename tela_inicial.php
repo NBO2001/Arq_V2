@@ -80,7 +80,8 @@ include_once 'ConAL.php';
      <li><a href="altera_tema.php">Alterar tema</a></li>
      <?php
      if ($_SESSION['acesso']>=2){
-       echo "<li><a href='mult_etq.php'>Gerar etiquetas</a></li>";
+       echo "<li><a href='mult_etq.php'>Gerar etiquetas por matricula</a></li>";
+        echo "<li><a href='gerador_de_etq.php'>Gerar etiquetas por Condição</a></li>";
      }
     if ($_SESSION['acesso']==4){
       echo "<li><a href='multup.php'>Adicionar documentos</a></li>";

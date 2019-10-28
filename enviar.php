@@ -104,11 +104,12 @@ if($_COOKIE["tema"] <> "a"){
     <option>Ficha Cadastral</option>
     <option>Processo</option>
     <option>Requerimento</option>
-    <option>TCE</option>
+    <option>TERMO DE COMPROMISSO DE ESTÁGIO (TCE)</option>
     <option>Histórico Escolar</option>
-    <option>Outro tipo de Ficha</option>
+    <option>FICHA</option>
     <option>Ofício</option>
     <option>Formulário de correção de notas e faltas</option>
+    <option>MEMORANDO</option>
   </select><br><br>
 
   <label>Classificação do documento:&nbsp;</label><br><br>

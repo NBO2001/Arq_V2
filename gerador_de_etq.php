@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION['acesso'] <> 4){
+if($_SESSION['acesso'] < 1){
   header("Location:index.php");
   die;
 }
@@ -39,7 +39,7 @@ if($_COOKIE["tema"] <> "a"){
    <input type="checkbox" id="chec">
    <nav id="nave" >
        <ul>
-        <li><a href="pg_ini1.php">Inicio</a></li>
+        <li><a href="tela_inicial.php">Inicio</a></li>
        <li><a href="sair.php">Sair</a></li>
        </ul>
    </nav>

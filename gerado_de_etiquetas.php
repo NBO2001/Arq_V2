@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION['acesso'] <> 4){
+if($_SESSION['acesso'] < 1){
   header("Location:index.php");
   die;
 }
@@ -12,14 +12,12 @@ $stmt = $pdo->prepare("$query ORDER BY Alunos.Cod_cur ASC, Num_mat ASC");
 $stmt->execute(array('id','Cod_cur','Num_mat','Nome_civil','Nome_cur','Fin','Fev','Ain','Aev','sistema'));
 
 $tabela = "";
-$tbodya1 = "<tr style='height:46.50pt;mso-height-source:userset;mso-height-alt:930;'>";
-
-$tbodya2 = "<tr style='height:31.50pt;mso-height-source:userset;mso-height-alt:630;' height='42'>";
-
-$tbodya3 = "<tr style='height:25.50pt;mso-height-source:userset;mso-height-alt:510;' height='34'>";
-$tbodya4 ="<tr style='height:24.00pt;mso-height-source:userset;mso-height-alt:480;' height='32'>";
-$tbodya5 ="<tr style='height:15.00pt;mso-height-source:userset;mso-height-alt:300;' height='20'>";
-$tbodya6="<tr style='height:15.00pt;mso-height-source:userset;mso-height-alt:300;' height='20'>";
+$tbodya1 = "<tr>";
+$tbodya2 = "<tr>";
+$tbodya3 = "<tr>";
+$tbodya4 ="<tr>";
+$tbodya5 ="<tr>";
+$tbodya6="<tr>";
 
 
 $linha1 = "";
@@ -48,14 +46,13 @@ if($contagem <= 2){
         <td class='xl73' >$Nome_cur</td>";
   $linha3 = $linha3."<td class='xl74' colspan='2' >$Num_mat</td>";
   $linha4 = $linha4."<td class='xl76' colspan='2' >$Nome_civil</td>";
-  $linha5 = $linha5."<td class='xl78' colspan='2' >$Fin</td>";
-  $linha6 = $linha6."<td class='xl78' colspan='2' >$Ain</td>";
-  $linha7 = $linha7."<td class='xl78' colspan='2'>$Fev</td>";
+  $linha5 = $linha5."<td class='xl80' colspan='2' >$Fin</td>";
+  $linha6 = $linha6."<td class='xl80' colspan='2' >$Ain</td>";
+  $linha7 = $linha7."<td class='xl80' colspan='2'>$Fev</td>";
   $linha8 = $linha8."<td class='xl80' colspan='2'>$Aev</td>";
   $linha9 = $linha9."<td class='xl80' colspan='2'>$sistema</td>";
   $contagem++;
 }else{
-  $linha9 =$linha9."<td colspan='2' style='mso-ignore:colspan;'></td>";
   $valorfinal =$valorfinal.$tbodya1.$linha1."</tr>".$tbodya2.$linha3."</tr>".$tbodya4.$linha4."</tr>".$tbodya5.$linha5."</tr>".$tbodya5.$linha6."</tr>".$tbodya5.$linha7."</tr>".$tbodya5.$linha8."</tr>".$tbodya6.$linha9."</tr>";
   $valorfinal = $valorfinal."|";
   $linha1 = "";
@@ -68,12 +65,12 @@ if($contagem <= 2){
   $linha9 = "";
 
   $linha1 = $linha1."<td class='xl72' >$curso</td>
-        <td class='xl73' >A$Nome_cur</td>";
+        <td class='xl73' >$Nome_cur</td>";
   $linha3 = $linha3."<td class='xl74' colspan='2' >$Num_mat</td>";
   $linha4 = $linha4."<td class='xl76' colspan='2' >$Nome_civil</td>";
-  $linha5 = $linha5."<td class='xl78' colspan='2' >$Fin</td>";
-  $linha6 = $linha6."<td class='xl78' colspan='2' >$Ain</td>";
-  $linha7 = $linha7."<td class='xl78' colspan='2'>$Fev</td>";
+  $linha5 = $linha5."<td class='xl80' colspan='2' >$Fin</td>";
+  $linha6 = $linha6."<td class='xl80' colspan='2' >$Ain</td>";
+  $linha7 = $linha7."<td class='xl80' colspan='2'>$Fev</td>";
   $linha8 = $linha8."<td class='xl80' colspan='2'>$Aev</td>";
   $linha9 = $linha9."<td class='xl80' colspan='2'>$sistema</td>";
   $contagem = 2;
@@ -83,8 +80,11 @@ if($contagem <= 2){
 $valorfinal = explode("|",$valorfinal);
 $aa=0;
 while (isset($valorfinal[$aa])) {
-  $tabelat = $tabelat."<tbody>".$valorfinal[$aa]."</tbody>|";
-  $aa++;
+
+    $tabelat =$tabelat."<tbody>".$valorfinal[$aa]."</tbody>|";
+    $aa++;
+
+
 }
 $tabelat = explode("|",$tabelat);
 $ab=0;
@@ -105,9 +105,14 @@ if(isset($tabelat[$ab+2])){
 if(isset($tabelat[$ab+3])){
   $am4 = $tabelat[$ab+3];
 }
+if($ab == 0){
+  $tabela =$tabela."<div class ='div1'><table>".$am1.$am2.$am3.$am4."</table></div>";
+  $ab = $ab + 5;
+}else{
+  $tabela =$tabela."<div class ='div2'><table>".$am1.$am2.$am3.$am4."</table></div>";
+  $ab = $ab + 5;
+}
 
-$tabela =$tabela."<table>".$am1.$am2.$am3.$am4."</table>";
-$ab = $ab + 5;
 }
 
 
@@ -116,52 +121,58 @@ $ab = $ab + 5;
 <?php
  include_once 'ConAL.php';
  $style = "#Modelo_body{
- 	background-color: inherit;
- }
- #Modelo_body table{
- width:741.95pt;
- border-collapse:collapse;
- table-layout:fixed;
+    padding:0px 0px;
+ background-color: inherit;
+}
+.div1{
+height:1110px;
+}
+.div2{
+padding:0px 0px;
+height:1090px;
+}
+#Modelo_body table{
+  padding:0px 0px;
+width:15.5cm;
+height:25.5cm;
+border-collapse:collapse;
+border:1px solid black;
+overflow: auto;
+}
+#Modelo_body .xl72{
+font-weight: bold;
+font-size: 45px;
+height:1.5cm;
+width:3.5cm;
+border:1px solid black;
+
+}
+#Modelo_body .xl73{
+  width:4.5cm;
  border:1px solid black;
- }
- #Modelo_body .xl72{
+}
+#Modelo_body td{
+ border-right:.5pt solid black;
+ border-bottom:.5pt solid black;
+}
+#Modelo_body .xl74{
+  text-align:left;
+   height:1cm;
  font-weight: bold;
- font-size: 50px;
- height:46.50pt;
- width:155.90pt;
- border:1px solid black;
- }
- #Modelo_body .xl73{
- font-size: 20px;
- 	width:155.35pt;
- 	border:1px solid black;
- }
- #Modelo_body td{
-
- 	border-right:.5pt solid black;
- 	border-bottom:.5pt solid black;
- 	border-bottom-style:hairline;
- }
- #Modelo_body .xl74{
- 	font-weight: bold;
- 	font-size: 40px;
- height:31.50pt;
-
- }
- #Modelo_body .xl76{
- 	font-weight: bold;
- height:25.50pt;
- }
- #Modelo_body .xl78{
- height:24.00pt;
-
- }
- #Modelo_body .xl80{
- height:15.00pt;
- }
+ font-size: 30px;
+}
+#Modelo_body .xl76{
+  height:1cm;
+}
+#Modelo_body .xl78{
+   height:1cm;
+   padding:0px 0px;
+}
+#Modelo_body .xl80{
+  font-size: 9px;
+   height:0.5cm;
+}
  ";
-      // Montamos nosso HTML no PHP, da forma que quisermos
-      // \t é o tab, \n a quebra de linha
       $html  = "<!DOCTYPE html><html lang='pt-br'>\n";
       $html .= "\t<head><meta charset='utf-8'><style>$style</style>\n";
       $html .= "\t\t<title>Etiquetas</title>\n";
@@ -182,7 +193,7 @@ $arquivoLocal = '/opt/lampp/htdocs/Arq_V2/'.$arquivo;
 if (!file_exists($arquivoLocal)) {
 exit;
 }
-$novoNome = 'Etq_geradas.xlsx';
+$novoNome = 'Etq_geradas.html';
 header('Content-Description: File Transfer');
 header('Content-Disposition: attachment; filename="'.$novoNome.'"');
 header('Content-Type: application/octet-stream');
