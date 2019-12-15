@@ -4,14 +4,15 @@ if($_SESSION['acesso']<>4){
  header("Location:index.php");
 }
 
-ini_set('upload_max_filesize', '2000M');
-ini_set('post_max_size', '2000M');
-ini_set('max_input_time', 300);
-ini_set('max_execution_time', 300);
+ini_set('upload_max_filesize', '20000M');
+ini_set('post_max_size', '20000M');
+ini_set('max_input_time', 3000);
+ini_set('max_execution_time', 3000);
 
 include_once 'ConAL.php';
-
-$dire = "/home/arquivo/Área de Trabalho/In/pdf/";
+$conf = fopen('conf.txt','r');
+$conf = fgets($conf, 1024);
+$dire = "$conf/In/pdf/";
 $magemfinal = "";
 if(!is_dir($dire)){
 	echo "Pasta $dire nao existe";
@@ -71,10 +72,12 @@ if(!is_dir($dire)){
           $horari = $data[0]-1;
           $horari = $horari = $dataLocal." -- ".$horari.":".$data[1].":".$data[2];
           $usuarioname = $_SESSION['usuarioname'];
+          $dire = "$conf/In/pdf/";
           $dire .=$nun."/";
           mkdir($dire);
           chmod ($dire,0777);
           if(move_uploaded_file($arquivo['tmp_name'][$controle], $dire.$tipodoc."->".$horari.".pdf")){
+            echo $dire."<br>";
             $nome_pdf = $tipodoc."->".$horari.".pdf";
             $can = "/In/pdf/".$nun."/".$nome_pdf;
             $result_usuarioife = "SELECT * FROM Ife WHERE cod LIKE '$cladoc'";
@@ -127,7 +130,7 @@ if(!is_dir($dire)){
 
         }else{
 
-          $magemfinal = $magemfinal."<a href='pg_res_pes_mat.php?alid=$nun' target='_blank'><p>Matricula:$curso --> $matri <br> Nome: $nomejh<br>Aluno já tem ficha de cadastro</p></a><br>";
+        $magemfinal = $magemfinal."<a href='pg_res_pes_mat.php?alid=$nun' target='_blank'><p>Matricula:$curso --> $matri <br> Nome: $nomejh<br>Aluno já tem ficha de cadastro</p></a><br>";
         }
 
 

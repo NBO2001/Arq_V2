@@ -26,7 +26,22 @@ function pesquisa_doc(){
                <td style='font-size:17px;'>".$item['class_doc']."</td>
                <td style='font-size:17px;'>".$item['nome']."</td>
                <td style='font-size:15px;'>".$item['ano_doc']."</td>
-               <td>".$item['data_inserido']."</td>
+               </tr>";
+    }
+}
+function pesquisa_doc3(){
+  $pdo = new PDO( 'mysql:host=localhost;dbname=Al', 'root', '' );
+  $pdo -> query("SET NAMES UTF8");
+  $stmt = $pdo->prepare("SELECT * FROM Ko WHERE imagem LIKE '$this->im' ORDER BY ano_doc ASC");
+  $stmt->execute(array('id','data_inserido','tipo_doc','class_doc','nome','ano_doc'));
+  $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    foreach($resultado as $item){
+      $this->tb .= "<tr onclick='visul(".$item['id'].");'>
+               <td style='display:none;'>".$item['id']."</td>
+               <td style='font-size:17px;'>".$item['tipo_doc']."</td>
+               <td style='font-size:17px;'>".$item['class_doc']."</td>
+               <td style='font-size:17px;'>".$item['nome']."</td>
+               <td style='font-size:15px;'>".$item['ano_doc']."</td>
                </tr>";
     }
 }
@@ -111,7 +126,6 @@ function exibir_tabela(){
                <th>Tipo de <br> documento</th>
                <th>Descrição</th>
                <th>Ano do documento</th>
-               <th>Inserido em:</th>
           <tr>
      </thead>
      <tbody>

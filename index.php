@@ -11,6 +11,7 @@ if(isset($_COOKIE["tema"])){
 <meta charset="utf=8">
 <title>Tela inicial</title>
 <link rel="stylesheet" type="text/css" href="css/es.css">
+<link type='image/x-icon' rel='shortcut icon' href='icones/ufamicon.ico'>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
 <?php
   if(isset($_SESSION['ifon'])){
@@ -40,7 +41,7 @@ if(isset($_COOKIE["tema"]) AND $_COOKIE["tema"] <> "a"){
 
     <input class="logbtn" name="btnlo" type="submit" value="Entrar"></input>
 
-
+  <br/><a href='recupera_senha.php'>Esqueceu a senha ?</a>
   </form>
     <script type="text/javascript">
     $(".txtb input").on("focus",function(){
@@ -51,10 +52,9 @@ if(isset($_COOKIE["tema"]) AND $_COOKIE["tema"] <> "a"){
       if($(this).val() == "")
       $(this).removeClass("focus");
     });
-
-    </script>
+</script>
 </body>
 <footer>
-  &copy;2019 N.B.O
-</footer>
+ <label >&copy;2019 N.B.O <br>Suporte: arquivo_proeg@ufam.edu.br<label>
+</footer> 
 </html>

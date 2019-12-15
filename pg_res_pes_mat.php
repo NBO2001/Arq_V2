@@ -32,6 +32,7 @@ if(isset($_GET['alid'])){
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="css/es.css">
+<link type='image/x-icon' rel='shortcut icon' href='ufamicon.ico'>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <?php
 if(isset($_COOKIE["tema"])){
@@ -77,6 +78,7 @@ if($_COOKIE["tema"] <> "a"){
        }else if($_SESSION['acesso']== 3 or 4){
          echo "<li><a href='etq_uni.php?alid=".$al->getId()."'>Gerar etiqueta</a></li>";
          echo "<li><a href='enviar.php?alid=".$al->getId()."'>Inserir documento</a></li>";
+         echo "<li><a href='adicionar_documentos.php?alid=".$al->getId()."'>Inserir vários documento</a></li>";
          echo "<li><a href='alter_registro.php?alid=".$al->getId()."'>Altera registro</a></li>";
          echo "<li><a href='mensa_re.php'>Mensagem</a></li>";
         }
@@ -95,6 +97,11 @@ $tb = new Tabela();
 $tb->setIm($al->getId());
 $tb->pesquisa_doc();
 $tb->exibir_tabela();
+
+if(isset($_SESSION['msg_erro'])){
+  echo $_SESSION['msg_erro'];
+  unset ($_SESSION['msg_erro']);
+}
 ?>
 </div>
 

@@ -74,12 +74,12 @@ if($_COOKIE["tema"] <> "a"){
           <option>CRC</option>
           <option>CRD</option>
           <option>CM</option>
-	  <option>COA</option>
-         <option>DPA</option>
-	<option>Protocolo</option>
+	        <option>COA</option>
+          <option>DPA</option>
+        	<option>Protocolo</option>
         </select><br><br>
-        <label >Digite a senha:</label>
-        <input  type='text' name='senhauso' required><br><br>
+        <label >Digite o email:</label>
+        <input  type='email' name='email_n_uso' required><br><br>
         <label >Nivel de acesso</label>
         <input  type='number' min='1' max='3' name='acesso' required><br><br>
        <input  type='submit' value='Cadastrar'>

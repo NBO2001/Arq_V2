@@ -28,9 +28,9 @@ $a7 .=$et->getA7();
 $a8 .=$et->getA8();
 if(isset($var[$contador+1])){
   $al2 = new Aluno();
-  $al2 -> pesquisa_banco2($var[1]);
+  $al2 -> pesquisa_banco2($var[$contador+1]);
   $et2 = new Etiquetas();
-  $et2 -> etq($al2->getCod(),$al->getNome_cur(),$al2->getNum_mat(),$al2->getNome_civil(),$al2->getFin(),$al2->getAin(),$al2->getFev(),$al2->getAev(),$al2->getSistema());
+  $et2 -> etq($al2->getCod(),$al2->getNome_cur(),$al2->getNum_mat(),$al2->getNome_civil(),$al2->getFin(),$al2->getAin(),$al2->getFev(),$al2->getAev(),$al2->getSistema());
   $a1 .=$et2->getA1();
   $a2 .=$et2->getA2();
   $a3 .=$et2->getA3();

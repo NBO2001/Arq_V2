@@ -16,6 +16,7 @@ include_once 'ConAL.php';
    <meta http-equiv="refresh" content="120">
    <title>Tela inicial</title>
    <link rel="stylesheet" type="text/css" href="css/es.css">
+   <link type='image/x-icon' rel='shortcut icon' href='icones/ufamicon.ico'>
    <?php
    if(isset($_COOKIE["tema"])){
      $tema = $_COOKIE["tema"];
@@ -76,7 +77,7 @@ include_once 'ConAL.php';
  <input type="checkbox" id="chec">
  <nav id="nave" >
      <ul>
-       <li><a href="alterar_senha.php">Alterar senha</a></li>
+       <li><a href="alterar_senha.php">Perfil</a></li>
      <li><a href="altera_tema.php">Alterar tema</a></li>
      <?php
      if ($_SESSION['acesso']>=2){
@@ -133,6 +134,8 @@ $fun = "window.location.href='cor_etq.php'";
  </div>";
  }
  ?>
- <label id="copra">&copy;2019 N.B.O<label>
  </body>
+ <footer>
+ <label >&copy;2019 N.B.O <br>Suporte: arquivo_proeg@ufam.edu.br<label>
+</footer> 
  </html>

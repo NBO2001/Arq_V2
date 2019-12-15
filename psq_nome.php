@@ -10,7 +10,6 @@ $n -> pesquisa_matricula($_GET['nun']);
 }else{
 $nomepes = filter_input(INPUT_POST,'nomeaa',FILTER_SANITIZE_STRING);
 $n -> pesquisa_nome($nomepes);
-
 }
 ?>
 <!DOCTYPE html>

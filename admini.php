@@ -55,8 +55,8 @@ if($_COOKIE["tema"] <> "a"){
 <button onclick="window.location.href='alter_uso.php'">Alterar usuarios</button><br><br>
 <button onclick="window.location.href='relatorios.php'">Relatórios</button><br><br>
 <button onclick="window.location.href='gerador_de_etq.php'">Gerar etiquetas</button><br><br>
-<button>Adicionar dados</button><br><br>
-<button>Documentos a serem eliminados</button><br><br>
+<button onclick="window.location.href='upload_por_xml.php'">Adicionar dados</button><br><br>
+<button onclick="window.location.href='gerenciamento.php'">Gerenciamento do sistema</button><br><br>
 <button onclick="window.location.href='tela_inicial.php'">Voltar</button><br><br>
 </div>
 

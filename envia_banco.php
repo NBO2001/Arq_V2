@@ -8,7 +8,8 @@ if($_SESSION['acesso']== 1 or $_SESSION['acesso']== 2 or $_SESSION['acesso']== "
   unset ($_SESSION['ifon']);
 
 include_once 'ConAL.php';
-
+  $conf = fopen('conf.txt','r');
+  $conf = fgets($conf, 1024);
   $nome = filter_input(INPUT_POST,'nome',FILTER_SANITIZE_STRING);
   $ano = filter_input(INPUT_POST,'ano',FILTER_SANITIZE_STRING);
   $tipo_doc =filter_input(INPUT_POST,'assunto',FILTER_SANITIZE_STRING);
@@ -94,22 +95,22 @@ $_SESSION['ref'] = "<script>window.location.reload();</script>";
   }
 
   $destin_fin = $row_usuario['destin_fin'];
-  $dire = "/home/arquivo/Área de Trabalho/In/pdf/".$nun."/";
+  $dire = "$conf/In/pdf/".$nun."/";
   mkdir($dire);
   chmod ($dire,0777);
   if(move_uploaded_file($_FILES['pdf']['tmp_name'],$dire.$tipo_docu." -- ".$horari.".pdf")){
-    $fp = fopen("test.sh","a+");
+    /*
+      $fp = fopen("test.sh","a+");
       $fop = "test.sh";
       chmod ($fop,0777);
-    $nome_pdf = $tipo_docu." -- ".$horari.".pdf";
-    $can = "/In/pdf/".$nun."/".$nome_pdf;
-    $tes = "
+      $tes = "
       git add pdf/".$nun."/
       git commit -m '".$nome."'";
-
       fwrite($fp, $tes);
       fclose($fp);
-
+    */
+    $nome_pdf = $tipo_docu." -- ".$horari.".pdf";
+    $can = "/In/pdf/".$nun."/".$nome_pdf;
       $sql = "INSERT INTO Ko (id,nome, imagem,nome_pdf,tipo_doc,ano_doc,data_inserido,can,fase_con,fase_in,destin_fin,ano_ex,usuarioname,class_doc) VALUES (NULL,'$nome', '$nun','$nome_pdf','$tipo_doc','$ano','$dataL','$can','$fase_con','$fase_in','$destin_fin',$ano_ex,'$usuarioname','$tipo_docu')";
       $rs = mysqli_query($conn,$sql);
       //passthru('sh test.sh');

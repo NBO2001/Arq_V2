@@ -110,6 +110,9 @@ if($_COOKIE["tema"] <> "a"){
     <option>Ofício</option>
     <option>Formulário de correção de notas e faltas</option>
     <option>MEMORANDO</option>
+    <option>RESOLUÇÃO</option>
+    <option>PORTARIA</option>
+    <option>PARECE</option>
   </select><br><br>
 
   <label>Classificação do documento:&nbsp;</label><br><br>
@@ -148,11 +151,7 @@ if($_COOKIE["tema"] <> "a"){
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 <script>
-    $(function () {
-        $("#assunto").autocomplete({
-            source: 'proc_pesq_msg.php'
-        });
-    });
+
 </script>
 <script>
 
