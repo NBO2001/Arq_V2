@@ -6,7 +6,6 @@ if($_SESSION['acesso']<>4){
 header('Location:../index.php');
 die;
 }
-
 ?>
 <!DOCTYPE html>
 <html lang='pt-br'>
