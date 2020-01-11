@@ -1453,7 +1453,7 @@ width:100%;
   #check_btn1:checked ~ #btn_pesquisa_mat{
 	display: block;
 	border-top: none;
-	animation: throw 0.7s linear;
+	animation: throw 0.4s linear;
   }
 /* segundo btn - o de nome*/
 #btn_pesquisa_mat2{
@@ -1488,33 +1488,18 @@ width:100%;
   #check_btn2:checked ~ #btn_pesquisa_mat2{
 	display: block;
 	border-top: none;
-	animation: throw 0.7s linear;
+	animation: throw 0.4s linear;
   }
   @keyframes throw {
-	0%,20% {
+	0%,50% {
 	  opacity: 0.0;
 	   background-color: #f88701;
 	   height:0px;
 	  }
-	 21%,40% {
-	  opacity: 0.0;
-	   background-color: #f88701;
-	   height:10px;
-	  }
-	  41%,50% {
-		opacity: 0.0;
-	   background-color: #f88701;
-	   height:20px;
-	  }
 	  51%,63% {
-		opacity: 0.4;
+	opacity: 0.4;
 	   background-color: #f88701;
 	   height:30px;
-	  }
-	 64% 
-	 {
-	  opacity: 0.6;
-	   background-color: lime;height:40px;
 	  }
 	 100% 
 	 {

@@ -17,22 +17,24 @@ function pesquisa_nome($nome){
   $stmt->execute(array('id','Cod_cur','Num_mat','Nome_civil','Nome_cur','Nome_social'));
   $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
   if(isset($resultado[0]['id'])){
-    foreach($resultado as $item){
-      $this->tb .= "<tr>
-               <td style='display:none;'>".$item['id']."</td>
-               <td style='font-size:17px;'>".$item['Cod_cur']."-->".$item['Nome_cur']."</td>
-               <td style='font-size:17px;'>".$item['Num_mat']."</td>
-               <td style='font-size:17px;'>".$item['Nome_civil']."</td>
-               <td style='font-size:15px;'>".$item['Nome_social']."</td>
-               </tr>";
+    if(empty($resultado[1]['id'])){
+      header("Location:pg_res_pes_mat.php?alid=".$resultado[0]['id']."");
+    }else{
+      foreach($resultado as $item){
+        $this->tb .= "<tr>
+                 <td style='display:none;'>".$item['id']."</td>
+                 <td style='font-size:17px;'>".$item['Cod_cur']."-->".$item['Nome_cur']."</td>
+                 <td style='font-size:17px;'>".$item['Num_mat']."</td>
+                 <td style='font-size:17px;'>".$item['Nome_civil']."</td>
+                 <td style='font-size:15px;'>".$item['Nome_social']."</td>
+                 </tr>";
+      }
     }
-  }else{
+}else{
     $_SESSION['ifon']="<script>alert('A pesquisa não retornou resultados')</script>";
     header("Location:tela_inicial.php");
     die;
   }
-   
-
 }
 function pesquisa_matricula($matricula){
   $this->matricula = $matricula;
