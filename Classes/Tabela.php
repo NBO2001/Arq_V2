@@ -13,6 +13,9 @@ function setIm($im){
 function getId(){
   return $this->id;
 }
+function getTb(){
+  return $this->tb;
+}
 function pesquisa_doc(){
   $pdo = new PDO( 'mysql:host=localhost;dbname=Al', 'root', '' );
   $pdo -> query("SET NAMES UTF8");
@@ -116,7 +119,10 @@ else
 }
 </script>";
 }
-function exibir_tabela(){
+function exibir_tabela(){ 
+  if(empty($this->tb)){
+    echo "<span>Esse aluno não tem nenhum documeto digitalizado.</span>";
+  }else{
   echo "
   <table  id='minhaTabela' class='tabfom'>
      <thead class='cabecalj'>
@@ -132,6 +138,7 @@ function exibir_tabela(){
      $this->tb
      </tbody>
   </table>";
+  }
 }
 
 }

@@ -51,7 +51,6 @@ if($_COOKIE["tema"] <> "a"){
   </div>
 <div id="admini_buttons">
 <button onclick="window.location.href='ad_uso.php'">Adicionar usuarios</button><br><br>
-<button onclick="window.location.href='rev_uso.php'">Remover usuarios</button><br><br>
 <button onclick="window.location.href='alter_uso.php'">Alterar usuarios</button><br><br>
 <button onclick="window.location.href='relatorios.php'">Relatórios</button><br><br>
 <button onclick="window.location.href='gerador_de_etq.php'">Gerar etiquetas</button><br><br>

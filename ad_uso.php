@@ -2,6 +2,7 @@
 session_start();
 if($_SESSION['acesso'] <> 4){
   header("Location:index.php");
+  die;
 }
 include_once "ConAL.php";
 ?>

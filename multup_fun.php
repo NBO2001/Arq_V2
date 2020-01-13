@@ -1,148 +1,79 @@
 <?php
 session_start();
-if($_SESSION['acesso']<>4){
+if($_SESSION['acesso']<3){
  header("Location:index.php");
+ die;
 }
-
+require_once "Conec_PDO.php";
+set_time_limit(0);
+date_default_timezone_set('America/Manaus');
 ini_set('upload_max_filesize', '20000M');
 ini_set('post_max_size', '20000M');
 ini_set('max_input_time', 3000);
 ini_set('max_execution_time', 3000);
 
-include_once 'ConAL.php';
+
+$magemfinal = "";
 $conf = fopen('conf.txt','r');
 $conf = fgets($conf, 1024);
 $dire = "$conf/In/pdf/";
-$magemfinal = "";
 if(!is_dir($dire)){
-	echo "Pasta $dire nao existe";
+echo "Pasta $dire nao existe";
+
 }else{
-	$arquivo = isset($_FILES['arquivo']) ? $_FILES['arquivo'] : FALSE;
-	for ($controle = 0; $controle < count($arquivo['name']); $controle++){
-    $numero = $arquivo['name'][$controle];
-    $numero =explode('.', $numero);
-    $numerom = $numero[0];
-    $numerox = $numero[1];
-    if ($numerox == "pdf"){
-      $numer = explode(' ', $numerom);
-      $numerom= $numer[0];
-      if ($numer[1]==1){
-        $tipodoc = "FICHA CADASTRAL";
-      }else if($numer[1]==2){
-        $tipodoc = "PROCESSO";
-      }
-      else if($numer[1]==3){
-        $tipodoc = "REQUERIMENTO";
-      }
-      else if($numer[1]==4){
-        $tipodoc = "TCE";
-      }
-      else if($numer[1]==5){
-        $tipodoc = "HISTÓRICO ESCOLAR";
-      }
-      else if($numer[1]==6){
-        $tipodoc = "OUTRO TIPO DE FICHA";
-      }
-      $cladoc = explode('-',$numer[2]);
-      $cladoc = $cladoc[0].'.'.$cladoc[1];
-      $comentario = explode('-',$numer[4]);
-      $comentario = $comentario[0].' '.$comentario[1];
-      $comentario=strtoupper($comentario);
-      $result_usuario = "SELECT *,count(*) FROM Alunos WHERE Num_mat LIKE '$numerom'";
-      $resultado_usuario = mysqli_query($conn, $result_usuario);
-      $row_usuario = mysqli_fetch_array($resultado_usuario);
-      if ($row_usuario['count(*)']==1) {
-        $matri = $row_usuario['Num_mat'];
-        $nomejh = $row_usuario['Nome_civil'];
-        $curso = $row_usuario['Cod_cur'];
-        $nun = $row_usuario['id'];
-        if ($tipodoc =="FICHA CADASTRAL" ){
+  if(isset($_POST['enviar1'])){
+    $procura_ult = $pdo->prepare("SELECT id FROM Ko ORDER BY id DESC LIMIT 1");
+    $procura_ult->execute();
+    $procura_ult_resul = $procura_ult->fetchAll(PDO::FETCH_ASSOC);
+    $ult_registro = $procura_ult_resul[0]['id'];
+    $tipodoc = "FICHA CADASTRAL";
+    $class_N = "125.43 -- Assentamentos individuais dos alunos (Dossiês dos alunos)";
+    $complemento = "MATRICULA INSTITUCINAL";
+    $fase_corrente = "Enquanto o aluno mantiver o vínculo com a instituição de ensino";
+    $fase_intermediaria = "-";
+    $destino_final = "Eliminação";
+    $usuarioname = $_SESSION['usuarioname'];
+    $ano = $_POST['ano'];
+    $data_atual = date('Y-m-d');
 
-          $coman = "SELECT * FROM Ko WHERE imagem LIKE '$nun' AND class_doc LIKE 'FICHA CADASTRAL'";
-          $ver = mysqli_query($conn,$coman);
-          $verificador = mysqli_fetch_array($ver);
-          $dois = $verificador['id'];
-        }if ($dois == ""){
-
-          date_default_timezone_set('America/Sao_Paulo');
-          $dataLocal = date('d-m-Y', time());
-          $dataL = date('Y-m-d', time());
-          $data=date('H:i:s');
-          $data=explode(':',$data);
-          $horari = $data[0]-1;
-          $horari = $horari = $dataLocal." -- ".$horari.":".$data[1].":".$data[2];
-          $usuarioname = $_SESSION['usuarioname'];
-          $dire = "$conf/In/pdf/";
-          $dire .=$nun."/";
-          mkdir($dire);
-          chmod ($dire,0777);
-          if(move_uploaded_file($arquivo['tmp_name'][$controle], $dire.$tipodoc."->".$horari.".pdf")){
-            echo $dire."<br>";
-            $nome_pdf = $tipodoc."->".$horari.".pdf";
-            $can = "/In/pdf/".$nun."/".$nome_pdf;
-            $result_usuarioife = "SELECT * FROM Ife WHERE cod LIKE '$cladoc'";
-            $resultado_usuarioife = mysqli_query($conn, $result_usuarioife);
-            $row_usuarioife = mysqli_fetch_array($resultado_usuarioife);
-            $tipo_doc = $row_usuarioife ['cod']." -- ".$row_usuarioife ['nome_doc'];
-            $destin_fin = $row_usuarioife ['destin_fin'];
-            $fase_con =$row_usuarioife ['fase_con'];
-            $fase_con =explode(' ',$fase_con);
-            $ano_va = $fase_con[0];
-            $fase_in = $row_usuarioife ['fase_in'];
-            $fase_in = explode(' ',$fase_in);
-            $ano_vb = $fase_in[0];
-            if ($ano_va > 0){
-              if ($ano_vb>0){
-                $ano_ex = $ano_va+$ano_vb;
-                $ano_ex = $ano + $ano_ex;
-                $ano_ex ="'".$ano_ex."'";
-                $fase_con =$row_usuarioife ['fase_con'];
-                $fase_in = $row_usuarioife ['fase_in'];
-              }else{
-                    $ano_ex = $ano_va;
-                    $ano_ex = $ano + $ano_ex;
-                    $ano_ex ="'".$ano_ex."'";
-                    $fase_con =$row_usuarioife ['fase_con'];
-                    $fase_in = $row_usuarioife ['fase_in'];
-
-                  }
-            }else{
-                    if ($ano_vb>0){
-                      $ano_ex = $ano_vb;
-                      $ano_ex =$ano + $ano_ex;
-                      $ano_ex ="'".$ano_ex."'";
-                      $fase_con =$row_usuarioife ['fase_con'];
-                      $fase_in = $row_usuarioife ['fase_in'];
-
-                    }else{
-                    $ano_ex ="NULL";
-                    $fase_con =$row_usuarioife ['fase_con'];
-                    $fase_in = $row_usuarioife ['fase_in'];
-                    }
-                }
-                $ano = $numer[3];
-                $sql = "INSERT INTO Ko (id,nome, imagem,nome_pdf,tipo_doc,ano_doc,data_inserido,can,fase_con,fase_in,destin_fin,ano_ex,usuarioname,class_doc) VALUES (NULL,'$comentario', '$nun','$nome_pdf','$tipo_doc','$ano','$dataL','$can','$fase_con','$fase_in','$destin_fin',$ano_ex,'$usuarioname','$tipodoc')";
-                $rs = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-                $magemfinal = $magemfinal."<a href='redir_mesn.php?texto=$nun' target='_blank'><p>Matricula:$curso --> $matri <br> Nome: $nomejh<br>Enviado com sucesso </p></a><br>";
-          }else{
-              $magemfinal = $magemfinal."Erro ao realizar upload";
-            }
-
+    $arquivo = isset($_FILES['arquivo']) ? $_FILES['arquivo'] : FALSE;
+    for ($controle = 0; $controle < count($arquivo['name']); $controle++){
+      $numero = explode('.',$arquivo['name'][$controle]);
+      if($numero[1] == "pdf"){
+        $procura_al = $pdo->prepare("SELECT *,count(*) FROM Alunos WHERE Num_mat LIKE '$numero[0]'");
+        $procura_al->execute();
+        $procura_al_resul = $procura_al->fetchAll(PDO::FETCH_ASSOC);
+        if($procura_al_resul[0]['count(*)']==1){
+          $id = $procura_al_resul[0]['id'];
+          if(!is_dir($conf."/In/pdf/".$id)){
+            mkdir($conf."/In/pdf/".$id);
+            chmod ($conf."/In/pdf/".$id,0777);
+          }
+          $nomedocumento = $procura_al_resul[0]['Num_mat'].'-65-'.$controle."-".date('His').".pdf";
+          $caminho = $id."/".$nomedocumento;
+          $destino = $conf."/In/pdf/".$caminho;
+            if (move_uploaded_file($arquivo['tmp_name'][$controle], $destino)) {
+              $ise = $pdo->prepare("INSERT INTO Ko SET nome = '$complemento',imagem = '$id',nome_pdf='$nomedocumento',
+              tipo_doc='$class_N',ano_doc='$ano',data_inserido='$data_atual',can='$caminho',fase_con='$fase_corrente',fase_in='$fase_intermediaria',
+              destin_fin='$destino_final',ano_ex='0',usuarioname='$usuarioname',class_doc='$tipodoc'");
+            $ise->execute();
+            $ult_registro++;
+            $al_ms = $procura_al_resul[0]['Num_mat']." -> ". $procura_al_resul[0]['Nome_civil']." -> ".$procura_al_resul[0]['Nome_cur'];
+            $magemfinal .="<p><a href='pg_res_pes_mat.php?alid=$id' target='_blank'>$al_ms</a>
+            <a href='pdf_visu.php?id=$ult_registro' target='_blank'>Aperte para visualizar o pdf</a></p>";
+          }
         }else{
-
-        $magemfinal = $magemfinal."<a href='pg_res_pes_mat.php?alid=$nun' target='_blank'><p>Matricula:$curso --> $matri <br> Nome: $nomejh<br>Aluno já tem ficha de cadastro</p></a><br>";
+          $magemfinal .="<p>A matricula -> ".$numero[0]." tem mais de um resultado ou nenhum, portanto é impossível</p>";
         }
-
-
+        
       }else{
-      $msh =$row_usuario['Cod_cur']." --> ".$row_usuario['Num_mat']." --> ".$row_usuario['Nome_civil'];
-      $magemfinal = $magemfinal."<a href='redir_mesn.php?texto=$nun' target='_blank'><p>$msh <br>FALHA: possui mais de uma matricula, falha ao tentar enviar</p></a><br>";
+        $magemfinal .="<p>o arquivo -> ".$numero[0]." não é pdf</p>";
       }
-    }else{
-    $magemfinal = $magemfinal."<p>$numerom.$numerox: tipo de arquivo não suportado</p><br>";
+      
     }
+    $_SESSION['stuup']= $magemfinal;
+    header("Location:multup.php");
   }
-$_SESSION['stuup']= $magemfinal;
-header("Location:multup.php");
+
 }
 ?>

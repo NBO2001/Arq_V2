@@ -47,19 +47,29 @@ if($_COOKIE["tema"] <> "a"){
     </nav>
 <div id="formmultup">
   <form enctype="multipart/form-data" method="POST" action="multup_fun.php">
-  			<input type="file" name="arquivo[]" multiple="multiple" required/>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-  			<input name="enviar" type="submit" value="Enviar">
+        <span>CUIDADO COM A UTILIZAÇÃO DESSE MODO!!!<br/> O NOME DO ARQUIVO DEVE ESTAR COM O NÚMERO DE MATRÍCULA DO ALUNO.<br/>NÃO PODE TER ESPAÇOS EM BRANCO.
+      <br/>APÓS O UPLOAD VERIFICAR SE ESTÁ TUDO CORRETO.</span><br/>
+  			<input type="file" accept='application/pdf' name="arquivo[]" multiple="multiple" required/><br/>
+        <label>Tipo de Documento: FICHA CADASTRAL</label><br/>
+        <label>Observação:MATRICULA INSTITUCIONAL</label><br/>
+        <label>Ano dos documentos:</label>
+        <input name='ano' value='<?php echo date('Y');?>' type='number' min='1900' max='<?php echo date('Y');?>' required>
+        <br/>
+  			<input name="enviar1" type="submit" value="Enviar">
   </form>
 </div>
+
 <div id="resuupmul">
 
 <?php
+
 if(isset($_SESSION['stuup'])){
   $stuo = $_SESSION['stuup'];
   echo $stuo;
   unset ($_SESSION['stuup']);
 }
+
 ?>
-</div>
+
 </body>
 </html>

@@ -10,6 +10,8 @@ ini_set('upload_max_filesize', '20000M');
 ini_set('post_max_size', '20000M');
 ini_set('max_input_time', 3000);
 ini_set('max_execution_time', 3000);
+set_time_limit(0);
+
 $conf = fopen('conf.txt','r');
 $conf = fgets($conf,1022);
 $arquivo = isset($_FILES['pdf']) ? $_FILES['pdf'] : FALSE;

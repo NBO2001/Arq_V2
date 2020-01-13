@@ -90,21 +90,31 @@ if($_COOKIE["tema"] <> "a"){
 <!-- Responsavel pela pesquisa-->
 <div id="dialog-confirm" title="O que deseja fazer?">
 </div>
-<?php   $al->exibir(); ?>
-<div  id="tab" class="tabelapgmat">
-<?php
+<?php   $al->exibir();
 $tb = new Tabela();
 $tb->setIm($al->getId());
 $tb->pesquisa_doc();
-$tb->exibir_tabela();
+?>
 
+<div  id='tab' class='tabelapgmat'>
+<?php
+$tb->exibir_tabela();
 if(isset($_SESSION['msg_erro'])){
   echo $_SESSION['msg_erro'];
   unset ($_SESSION['msg_erro']);
 }
 ?>
 </div>
-
+<?php
+if(empty($tb->getTb())){
+  echo "<script>document.getElementById('tab').style.display = 'none';</script>";
+  if($_SESSION['acesso']==1){
+  echo "<label style='position: absolute;top:350px;left:100px;'>Esse aluno não possui digitalização <a href='soli_pas.php?numat=".$al -> getNum_mat()."&alid=".$al->getId()."'>Solicitar pasta</a></label>";
+  }else{
+    echo "<label style='position: absolute;top:350px;left:100px;'>Esse aluno não possui digitalização</label>";
+  }
+}
+?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
@@ -116,6 +126,21 @@ if(isset($_SESSION['msg_erro'])){
     });
 </script>
 <script type="text/javascript">
+    function sizeOfThings(){
+        var windowWidth = window.innerWidth;
+        if(windowWidth < 1000){
+          document.getElementById('dadosal').style.display = "none";
+          document.getElementById('dadosal2').style.display = "inline";
+        }else{
+          document.getElementById('dadosal').style.display = "inline";
+          document.getElementById('dadosal2').style.display = "none";
+        }
+      };
+
+    sizeOfThings();
+    window.addEventListener('resize', function(){
+      sizeOfThings();
+    });
 var tabela = document.getElementById("minhaTabela");
 var linhas = tabela.getElementsByTagName("tr");
 for(var i = 0; i < linhas.length; i++){

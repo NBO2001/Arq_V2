@@ -55,8 +55,6 @@ if($_COOKIE["tema"] <> "a"){
 <input name="obv" type="text"><br><br>
 <input type="submit" value="Enviar">
 </form><br><br>
-<form action="pg_res_pes_mat.php">
-<input type="submit" value="Voltar">
-</form>
+<label type='submit'><a href='pg_res_pes_mat.php?alid=<?php echo $_GET['alid'];?>'>Voltar</a></label>
 </body>
 </html>

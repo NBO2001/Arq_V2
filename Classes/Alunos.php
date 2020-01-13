@@ -101,29 +101,51 @@ function getNome_cur(){
       }else{
         $loc = "PASTA FÍSICA LOCALIZADA NO ARQUIVO NORTE";
       }
-
       echo "<div id='dadosal'>
-      <label style='color:#FE642E;' >Nome civil: &nbsp</label>
+      <label style='color:#A52A2A;' >Nome civil: &nbsp</label>
       <label> $this->Nome_civil </label><br>
-      <label style='color:#FE642E;'>Nome social: &nbsp</label>
+      <label style='color:#A52A2A;'>Nome social: &nbsp</label>
       <label>$this->Nome_social</label><br>
-      <label style='color:#FE642E;' >Matrícula: &nbsp</label>
+      <label style='color:#A52A2A;' >Matrícula: &nbsp</label>
       <label> $this->Num_mat &nbsp&nbsp&nbsp&nbsp&nbsp</label>
-      <label style='color:#FE642E;'>Curso: &nbsp</label>
+      <label style='color:#A52A2A;'>Curso: &nbsp</label>
       <label>$this->Cod_cur-- &nbsp </label>
       <label>$this->Nome_cur</label><br>
-      <label style='color:#FE642E;'>Forma de ingresso: &nbsp</label>
+      <label style='color:#A52A2A;'>Forma de ingresso: &nbsp</label>
       <label >$this->Fin &nbsp&nbsp | &nbsp</label>
-      <label style='color:#FE642E;'>Ano de ingresso: &nbsp</label>
+      <label style='color:#A52A2A;'>Ano de ingresso: &nbsp</label>
       <label >$this->Ain</label><br>
-      <label style='color:#FE642E;'>Forma de evasão: &nbsp</label>
+      <label style='color:#A52A2A;'>Forma de evasão: &nbsp</label>
       <label>$this->Fev&nbsp&nbsp | &nbsp</label>
-      <label style='color:#FE642E; '>Ano de evsão: &nbsp</label>
+      <label style='color:#A52A2A; '>Ano de evasão: &nbsp</label>
       <label>$this->Aev&nbsp&nbsp | &nbsp</label>
-      <label style='color:#FE642E';>Dados retirados do: &nbsp</label>
+      <label style='color:#A52A2A';>Dados retirados do: &nbsp</label>
       <label>$this->sistema</label><br>
       <label style='font-size: 11px;'>$loc</label>
-      </div>";
+      </div>
+      <div id='dadosal2' style='display:none;'>
+      <label style='color:#A52A2A;' >Nome civil:</label><br>
+      <label> $this->Nome_civil </label><br>
+      <label style='color:#A52A2A;'>Nome social:</label><br>
+      <label>$this->Nome_social</label><br>
+      <label style='color:#A52A2A;' >Matrícula:</label>
+      <label>$this->Num_mat</label><br>
+      <label style='color:#A52A2A;'>Curso: &nbsp</label>
+      <label>$this->Cod_cur:</label>
+      <label>$this->Nome_cur</label><br>
+      <label style='color:#A52A2A;'>Forma de ingresso: </label>
+      <label >$this->Fin</label><br>
+      <label style='color:#A52A2A;'>Ano de ingresso: </label>
+      <label >$this->Ain</label><br>
+      <label style='color:#A52A2A;'>Forma de evasão: </label>
+      <label>$this->Fev</label><br>
+      <label style='color:#A52A2A; '>Ano de evasão: </label>
+      <label>$this->Aev</label><br>
+      <label style='color:#A52A2A';>Dados retirados do: &nbsp</label>
+      <label>$this->sistema</label><br>
+      <label style='font-size: 40px;'>$loc</label>
+      </div>
+      ";
     }else{
       echo "<script>window.location.href='psq_nome.php?nun=$this->matricula'</script>";
     }

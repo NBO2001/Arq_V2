@@ -872,7 +872,16 @@ border-radius: 15px;
 	border: 1px solid black;
 	border-radius: 15px;
 }
-
+#dadosal2{
+	position: absolute;
+	left:5%;
+	font-size: 20px;
+	padding: 20px 5px;
+	margin: 5px;
+	width: 90%;
+	border: 1px solid black;
+	border-radius: 15px;
+}
 .tabelapgmat{
 position: absolute;
 
@@ -933,13 +942,15 @@ font-size: 50px;
 	text-align: center;
 	margin: 15px;
 	width:92%;
+	height: 300px;
 	border:1px solid black;
 	border-radius: 25px;
-	height: 60px;
+	
 }
 #resuupmul{
 	position: absolute;
 	left: 3%;
+	top:420px;
 	overflow: auto;
 	height: 400px;
 	width:90%;
@@ -962,10 +973,28 @@ font-size: 50px;
 	color: black;
 }
 
-#formmultup input{
-	width:400px;
+#formmultup input[type='submit']{
+	width:100px;
 	border:1px solid black;
 	border-radius: 25px;
+	margin: 10px;
+	font-size: 25px;
+}
+#formmultup input[type='number']{
+	width:70px;
+	border:1px solid black;
+	border-radius: 25px;
+	margin: 10px;
+	font-size: 25px;
+}
+#formmultup input[type='file']{
+	width:300px;
+	border:1px solid black;
+	border-radius: 25px;
+	margin: 10px;
+	font-size: 25px;
+}
+#formmultup label{
 	margin: 10px;
 	font-size: 25px;
 }
@@ -1572,6 +1601,15 @@ width:100%;
 		border: 1px solid white;
 		border-radius: 20px;
 	  }
+	  /** Visualização de informações dos alunos **/
+	  #dadosal2{
+		font-size: 80px;
+		word-wrap: break-word;
+		
+	 }
+	 #tab{
+	   display: none;
+	 }
 	  /** Menus de pesquisa**/
 	  #btn_pesquisa_mat{
 		height: 240px;
