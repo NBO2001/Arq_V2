@@ -1,10 +1,9 @@
 <?php
 session_start();
+require_once 'Conec_PDO.php';
 $opc = $_GET['nome'];
 if($opc == 'S'){
 $varpes = $_GET['iddoc'];
-$pdo = new PDO( 'mysql:host=localhost;dbname=Al', 'root', '' );
-$pdo -> query("SET NAMES UTF8");
 $stmt = $pdo->prepare("SELECT can FROM Ko WHERE id LIKE $varpes");
 $stmt->execute(array('can'));
 $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);

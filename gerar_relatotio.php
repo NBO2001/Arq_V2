@@ -1,10 +1,9 @@
 <?php
+require_once 'Conec_PDO.php';
 session_start();
 if(isset($_SESSION['query'])){
   $query = $_SESSION['query'];
 }
-$pdo = new PDO( 'mysql:host=localhost;dbname=Al', 'root', '' );
-$pdo -> query("SET NAMES UTF8");
   $stmt = $pdo->prepare("$query");
   $stmt->execute(array('id','Cod_cur','Num_mat','Nome_civil','Nome_cur','Fin','Fev','Ain','Aev','sistema'));
   $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);

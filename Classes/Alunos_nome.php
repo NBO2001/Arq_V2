@@ -10,8 +10,8 @@ function getNome(){
 function getMatricula(){
   return $this->matricula;
 }
-function pesquisa_nome($nome){
-  $pdo = new PDO( 'mysql:host=localhost;dbname=Al', 'root', '' );
+function pesquisa_nome($nome,$bd,$us,$sn){
+  $pdo = new PDO( 'mysql:host=localhost;dbname='.$bd,$us , $sn );
   $pdo -> query("SET NAMES UTF8");
   $stmt = $pdo->prepare("SELECT * FROM Alunos WHERE Nome_civil LIKE '%$nome%' OR Nome_social LIKE '%$nome%' ORDER BY Num_mat ASC LIMIT 500");
   $stmt->execute(array('id','Cod_cur','Num_mat','Nome_civil','Nome_cur','Nome_social'));
@@ -36,9 +36,9 @@ function pesquisa_nome($nome){
     die;
   }
 }
-function pesquisa_matricula($matricula){
+function pesquisa_matricula($matricula,$bd,$us,$sn){
   $this->matricula = $matricula;
-  $pdo = new PDO( 'mysql:host=localhost;dbname=Al', 'root', '' );
+  $pdo = new PDO( 'mysql:host=localhost;dbname='.$bd,$us , $sn );
   $pdo -> query("SET NAMES UTF8");
   $stmt = $pdo->prepare("SELECT * FROM Alunos WHERE Num_mat LIKE '$matricula%'  ORDER BY Num_mat ASC");
   $stmt->execute(array('id','Cod_cur','Num_mat','Nome_civil','Nome_cur','Nome_social'));

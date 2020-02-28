@@ -1,4 +1,5 @@
 <?php
+require_once 'Conec_PDO.php';
 session_start();
 if($_SESSION['acesso'] == ""){
   header("Location:tela_inicial.php");
@@ -8,8 +9,6 @@ if(isset($_COOKIE["tema"])){
 }else{
   setcookie("tema","a", (time() + (500 * 24 * 3600)));
 }
-$pdo = new PDO( 'mysql:host=localhost;dbname=Al', 'root', '' );
-$pdo -> query("SET NAMES UTF8");
 
 $stmt = $pdo->prepare("SELECT COUNT(DISTINCT Ko.imagem) AS total FROM Ko");
 $stmt->execute();

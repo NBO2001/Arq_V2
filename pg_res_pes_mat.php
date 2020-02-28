@@ -1,4 +1,5 @@
 <?php
+require_once 'Conec_PDO.php';
 session_start();
 if($_SESSION['acesso']==""){
  header("Location:index.php");
@@ -9,9 +10,10 @@ if(isset($_SESSION['ifon'])){
 }
 require_once 'Classes/Alunos.php';
 require_once 'Classes/Tabela.php';
+
 if(isset($_GET['alid'])){
   $al = new Aluno();
-  $al->pesquisa_banco2($_GET['alid']);
+  $al->pesquisa_banco2($_GET['alid'],$bd,$us,$sn);
 
 }else{
   if(isset($_GET['matri'])){
@@ -24,7 +26,7 @@ if(isset($_GET['alid'])){
 
   $al = new Aluno();
   $al -> setMatricula($ma);
-  $al->pesquisa_banco($ma);
+  $al->pesquisa_banco($ma,$bd,$us,$sn);
 }
 ?>
 <!DOCTYPE html>
@@ -33,7 +35,7 @@ if(isset($_GET['alid'])){
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="css/es.css">
 <link type='image/x-icon' rel='shortcut icon' href='ufamicon.ico'>
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="css/hemes_smoothness_jquery-ui.css">
 <?php
 if(isset($_COOKIE["tema"])){
   $tema = $_COOKIE["tema"];
@@ -93,7 +95,7 @@ if($_COOKIE["tema"] <> "a"){
 <?php   $al->exibir();
 $tb = new Tabela();
 $tb->setIm($al->getId());
-$tb->pesquisa_doc();
+$tb->pesquisa_doc($bd,$us,$sn);
 ?>
 
 <div  id='tab' class='tabelapgmat'>
@@ -115,8 +117,8 @@ if(empty($tb->getTb())){
   }
 }
 ?>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
 
 <script>
     $(function () {
@@ -213,7 +215,7 @@ if("<?php echo $_SESSION['acesso'];?>" == 4){
 <?php
 if(isset($_GET['iddoc'])){
 $t = new Tabela();
-$t->pesquisa_doc2($_GET['iddoc'],$_GET['alid']);
+$t->pesquisa_doc2($_GET['iddoc'],$_GET['alid'],$bd,$us,$sn);
 $t->exibir_dados();
 }
 ?>

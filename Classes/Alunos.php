@@ -44,14 +44,17 @@ function getNome_cur(){
   function getSistema(){
     return $this->sistema;
   }
-  function pesquisa_banco($ma){
-    $pdo = new PDO( 'mysql:host=localhost;dbname=Al', 'root', '' );
+
+  function pesquisa_banco($ma,$bd,$us,$sn){
+    $pdo = new PDO( 'mysql:host=localhost;dbname='.$bd,$us , $sn );
     $pdo -> query("SET NAMES UTF8");
-    $stmt = $pdo->prepare("SELECT *,COUNT(*) FROM Alunos WHERE Num_mat LIKE '$ma%'");
-    $stmt->execute(array('id','Cod_cur','Num_mat','Nome_civil','Nome_cur','Fin','Fev','Ain','Aev','sistema','Nome_social','COUNT(*)'));
+    $stmt = $pdo->prepare("SELECT * FROM Alunos WHERE Num_mat LIKE '$ma%'");
+    $stmt->execute();
     $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if(empty($resultado[1]['id'])){
+      $this->cont = 1;
+    }
       foreach($resultado as $item){
-        $this->cont =  $item['COUNT(*)'];
         $this->id =  $item['id'];
         $this->Cod_cur =  $item['Cod_cur'];
         $this->Num_mat =  $item['Num_mat'];
@@ -66,9 +69,9 @@ function getNome_cur(){
 
       }
   }
-  function pesquisa_banco2($id){
+  function pesquisa_banco2($id,$bd,$us,$sn){
     $this->id = $id;
-    $pdo = new PDO( 'mysql:host=localhost;dbname=Al', 'root', '' );
+    $pdo = new PDO( 'mysql:host=localhost;dbname='.$bd,$us , $sn );
     $pdo -> query("SET NAMES UTF8");
     $stmt = $pdo->prepare("SELECT * FROM Alunos WHERE id LIKE $this->id");
     $this->cont = 1;

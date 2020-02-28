@@ -1,4 +1,5 @@
 <?php
+require_once 'Conec_PDO.php';
 require_once 'Classes/Alunos.php';
 require_once 'Classes/Tabela.php';
 $al = new Aluno();
@@ -54,7 +55,7 @@ $al->exibir();
 <?php
 $tb = new Tabela();
 $tb->setIm($al->getId());
-$tb->pesquisa_doc3();
+$tb->pesquisa_doc3($bd,$us,$sn);
 $tb->exibir_tabela();
 ?>
 </div>

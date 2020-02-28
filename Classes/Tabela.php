@@ -16,8 +16,8 @@ function getId(){
 function getTb(){
   return $this->tb;
 }
-function pesquisa_doc(){
-  $pdo = new PDO( 'mysql:host=localhost;dbname=Al', 'root', '' );
+function pesquisa_doc($bd,$us,$sn){
+  $pdo = new PDO( 'mysql:host=localhost;dbname='.$bd,$us , $sn );
   $pdo -> query("SET NAMES UTF8");
   $stmt = $pdo->prepare("SELECT * FROM Ko WHERE imagem LIKE '$this->im' ORDER BY ano_doc ASC");
   $stmt->execute(array('id','data_inserido','tipo_doc','class_doc','nome','ano_doc'));
@@ -32,8 +32,8 @@ function pesquisa_doc(){
                </tr>";
     }
 }
-function pesquisa_doc3(){
-  $pdo = new PDO( 'mysql:host=localhost;dbname=Al', 'root', '' );
+function pesquisa_doc3($bd,$us,$sn){
+  $pdo = new PDO( 'mysql:host=localhost;dbname='.$bd,$us , $sn );
   $pdo -> query("SET NAMES UTF8");
   $stmt = $pdo->prepare("SELECT * FROM Ko WHERE imagem LIKE '$this->im' ORDER BY ano_doc ASC");
   $stmt->execute(array('id','data_inserido','tipo_doc','class_doc','nome','ano_doc'));
@@ -48,10 +48,10 @@ function pesquisa_doc3(){
                </tr>";
     }
 }
-function pesquisa_doc2($id,$im){
+function pesquisa_doc2($id,$im,$bd,$us,$sn){
   $this->id = $id;
   $this->im = $im;
-  $pdo = new PDO( 'mysql:host=localhost;dbname=Al', 'root', '' );
+  $pdo = new PDO( 'mysql:host=localhost;dbname='.$bd,$us , $sn );
   $pdo -> query("SET NAMES UTF8");
   $stmt = $pdo->prepare("SELECT * FROM Ko WHERE id LIKE '$this->id' ORDER BY ano_doc ASC");
   $stmt->execute(array('id','tipo_doc','class_doc','nome','ano_doc','data_inserido'));

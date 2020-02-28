@@ -1,4 +1,5 @@
 <?php
+require_once 'Conec_PDO.php';
 session_start();
 if($_SESSION['acesso']==""){
   header("Location:index.php");
@@ -6,10 +7,10 @@ if($_SESSION['acesso']==""){
 require_once 'Classes/Alunos_nome.php';
 $n = new Alunos_nome();
 if(isset($_GET['nun'])){
-$n -> pesquisa_matricula($_GET['nun']);
+$n -> pesquisa_matricula($_GET['nun'],$bd,$us,$sn);
 }else{
 $nomepes = filter_input(INPUT_POST,'nomeaa',FILTER_SANITIZE_STRING);
-$n -> pesquisa_nome($nomepes);
+$n -> pesquisa_nome($nomepes,$bd,$us,$sn);
 }
 ?>
 <!DOCTYPE html>
