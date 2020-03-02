@@ -50,8 +50,8 @@ if($_COOKIE["tema"] <> "a"){
   </nav>
   </div>
 <div id="admini_buttons">
-<button onclick="window.location.href='ad_uso.php'">Adicionar usuarios</button><br><br>
-<button onclick="window.location.href='alter_uso.php'">Alterar usuarios</button><br><br>
+<button onclick="window.location.href='lista_de_usuarios.php'">Usuários</button><br><br>
+
 <button onclick="window.location.href='relatorios.php'">Relatórios</button><br><br>
 <button onclick="window.location.href='gerador_de_etq.php'">Gerar etiquetas</button><br><br>
 <button onclick="window.location.href='upload_por_xml.php'">Adicionar dados</button><br><br>

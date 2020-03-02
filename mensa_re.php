@@ -113,7 +113,7 @@ if($_COOKIE["tema"] <> "a"){
 $ida = filter_input(INPUT_POST,'ida',FILTER_SANITIZE_STRING);
 if($ida <> ""){
 $ida = explode('.',$ida);
-header("Location:pg_res_pes_mat.php?alid=".$ida[1]);
+header("Location:pg_res_pes_mat.php?alid=".$ida[0]);
 }
 ?>
 

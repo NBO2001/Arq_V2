@@ -33,9 +33,16 @@ if(isset($_GET['alid'])){
 <html lang=pt-br>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/es.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/jquery.mask.min.js"/></script>
 <link type='image/x-icon' rel='shortcut icon' href='ufamicon.ico'>
 <link rel="stylesheet" href="css/hemes_smoothness_jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="css/es.css">
 <?php
 if(isset($_COOKIE["tema"])){
   $tema = $_COOKIE["tema"];
@@ -49,6 +56,48 @@ if($_COOKIE["tema"] <> "a"){
 <title>Inserir</title>
 </head>
 <body>
+
+<!-- Modal solicitação de pasta --->
+<div class="modal fade" id="soli_dig" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Solicitação</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+      <!-- Inicio do formulário -->
+      <form id='from_soli_dig' method='POST' action='solicitacao.php<?php echo "?alid=".$al->getId();?>'>
+          <div class="form-group">
+              <label for="obs">Alguma observação?</label>
+              <textarea name='obs' style="resize: none" class="form-control" id="obs" rows="3"></textarea>
+         </div>
+         <div class="form-check form-check-inline">
+            <input 
+            class="form-check-input" type="checkbox" name="urg" id="urg" value="1"
+                data-container="body" 
+                data-toggle="popover" 
+                data-placement="left"
+                data-content="Você receberá um email assim que a digitalização for disponibilizada." >
+            <label class="form-check-label" for="urg" >Ativar urgência</label>
+          </div>
+          <button type="submit" class="btn btn-outline-dark btn-block">Enviar pedido</button>
+      </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-info btn-block" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fim do modal solicitação de pasta -->
+
+
+
   <div id="logoufam" >
   <label for="chec">
   <img width="100px" height="90px" src="ufam.png"/>
@@ -70,7 +119,7 @@ if($_COOKIE["tema"] <> "a"){
 
     		<?php
         if($_SESSION['acesso']==1){
-          echo "<li><a href='soli_pas.php?numat=".$al -> getNum_mat()."&alid=".$al->getId()."'>Solicitar pasta</a></li>";
+          echo "<li data-toggle='modal' data-target='#soli_dig'><a href='#'>Solicitar pasta</a></li>";
           echo "<li><a href='mensa_visu.php'>Mensagem</a></li>";
 
        }else if($_SESSION['acesso']==2){
@@ -92,6 +141,7 @@ if($_COOKIE["tema"] <> "a"){
 <!-- Responsavel pela pesquisa-->
 <div id="dialog-confirm" title="O que deseja fazer?">
 </div>
+
 <?php   $al->exibir();
 $tb = new Tabela();
 $tb->setIm($al->getId());
@@ -108,18 +158,25 @@ if(isset($_SESSION['msg_erro'])){
 ?>
 </div>
 <?php
+//Se não tiver nada no contudo da tabela
 if(empty($tb->getTb())){
   echo "<script>document.getElementById('tab').style.display = 'none';</script>";
   if($_SESSION['acesso']==1){
-  echo "<label style='position: absolute;top:350px;left:100px;'>Esse aluno não possui digitalização <a href='soli_pas.php?numat=".$al -> getNum_mat()."&alid=".$al->getId()."'>Solicitar pasta</a></label>";
+  echo "<button style='position: absolute;top:400px;' type='button' class='btn btn-outline-success btn-block btn-lg' data-toggle='modal' data-target='#soli_dig'>
+  Solicitar digitalização
+</button>";
   }else{
-    echo "<label style='position: absolute;top:350px;left:100px;'>Esse aluno não possui digitalização</label>";
+
+    echo "  <label style='position: absolute;top:350px;left:100px;'>Esse aluno não possui digitalização</label>";
   }
 }
 ?>
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
 
+<script>
+$(document).ready(function(){
+  $('[data-toggle="popover"]').popover();   
+});
+</script>
 <script>
     $(function () {
         $("#assunto").autocomplete({

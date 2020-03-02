@@ -1,7 +1,7 @@
 <?php
 session_start();
 if($_SESSION['acesso'] <> 4){
-  header("Location:index.php");
+  header("Location:tela_inicial.php");
   die;
 }
 include_once "ConAL.php";

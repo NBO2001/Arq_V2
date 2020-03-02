@@ -20,6 +20,7 @@ if(isset($btn)){
   $setoruso= $valorfin[0]['setor'];
 
   if($usuario_name == $loginban && $senha_uso == $senhaban){
+        $_SESSION['id'] = $id;
         $_SESSION['usuarioname'] = $loginban;
         $_SESSION['acesso'] = $acesso_nivel;
         $_SESSION['setor']= $setoruso;

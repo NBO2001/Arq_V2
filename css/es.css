@@ -884,8 +884,7 @@ border-radius: 15px;
 }
 .tabelapgmat{
 position: absolute;
-
-top:295px;
+top:380px;
 left:5%;
 width: 90%;
 height: 300px;
@@ -1320,7 +1319,9 @@ border:1px solid black;
 }
 
 #logoufam label{
+font-size: 15px;
 margin: 5px;
+padding: 0px 0px 0px 0px;
 }
 #insti{
 	position: absolute;
@@ -1372,6 +1373,17 @@ display: none;
 	border: 1px solid black;
 	border-radius: 15px;
 	width: 550px;
+}
+#lista_de_usos_bory{
+	position: absolute;
+	border-radius: 15px;
+	border: 1px solid black;
+	left: 4%;
+	top:150px;
+	width: 90%;
+	height:400px;
+	overflow-y : scroll;
+	cursor: pointer;
 }
 #formsolicita{
 	position: absolute;
