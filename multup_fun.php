@@ -40,7 +40,7 @@ echo "Pasta $dire nao existe";
     for ($controle = 0; $controle < count($arquivo['name']); $controle++){
       $numero = explode('.',$arquivo['name'][$controle]);
       if($numero[1] == "pdf"){
-        $procura_al = $pdo->prepare("SELECT *,count(*) FROM Alunos WHERE Num_mat LIKE '$numero[0]'");
+        $procura_al = $pdo->prepare("SELECT count(*) FROM Alunos WHERE Num_mat LIKE '$numero[0]'");
         $procura_al->execute();
         $procura_al_resul = $procura_al->fetchAll(PDO::FETCH_ASSOC);
         if($procura_al_resul[0]['count(*)']==1){
