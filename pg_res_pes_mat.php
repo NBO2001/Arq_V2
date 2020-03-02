@@ -128,8 +128,7 @@ if($_COOKIE["tema"] <> "a"){
 
        }else if($_SESSION['acesso']== 3 or 4){
          echo "<li><a href='etq_uni.php?alid=".$al->getId()."'>Gerar etiqueta</a></li>";
-         echo "<li><a href='enviar.php?alid=".$al->getId()."'>Inserir documento</a></li>";
-         echo "<li><a href='adicionar_documentos.php?alid=".$al->getId()."'>Inserir vários documento</a></li>";
+         echo "<li><a href='adicionar_documentos.php?alid=".$al->getId()."'>Inserir documentos</a></li>";
          echo "<li><a href='alter_registro.php?alid=".$al->getId()."'>Altera registro</a></li>";
          echo "<li><a href='mensa_re.php'>Mensagem</a></li>";
         }
