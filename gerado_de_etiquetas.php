@@ -188,7 +188,7 @@ border:1px solid black;
 file_put_contents($arquivo, $html);
 
 set_time_limit(0);
-$arquivoLocal = '/opt/lampp/htdocs/Arq_V2/'.$arquivo;
+$arquivoLocal = '/var/www/html/'.$arquivo;
 if (!file_exists($arquivoLocal)) {
 exit;
 }
