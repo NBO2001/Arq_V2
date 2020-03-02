@@ -44,6 +44,9 @@ echo "Pasta $dire nao existe";
         $procura_al->execute();
         $procura_al_resul = $procura_al->fetchAll(PDO::FETCH_ASSOC);
         if($procura_al_resul[0]['count(*)']==1){
+        $procura_al = $pdo->prepare("SELECT * FROM Alunos WHERE Num_mat LIKE '$numero[0]'");
+        $procura_al->execute();
+        $procura_al_resul = $procura_al->fetchAll(PDO::FETCH_ASSOC);
           $id = $procura_al_resul[0]['id'];
           if(!is_dir($conf."/In/pdf/".$id)){
             mkdir($conf."/In/pdf/".$id);
