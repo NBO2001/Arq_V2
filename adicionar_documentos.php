@@ -3,7 +3,7 @@ require_once 'Conec_PDO.php';
 require_once 'Classes/Alunos.php';
 require_once 'Classes/Tabela.php';
 $al = new Aluno();
-$al->pesquisa_banco2($_GET['alid']);
+$al->pesquisa_banco2($_GET['alid'],$bd,$us,$sn);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
