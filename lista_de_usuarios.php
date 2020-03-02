@@ -27,6 +27,14 @@ if($_SESSION['acesso'] <> 4){
      echo "<link rel='stylesheet' type='text/css' href='css/$tema.css'>";
    }
    ?>
+<style>
+  #tab_uss{
+	width: 100%;
+	height:400px;
+	overflow-y : scroll;
+	cursor: pointer;
+  }
+  </style>
 </head>
 <body>
 <div id="logoufam" >
@@ -60,8 +68,10 @@ if(isset($_SESSION['info'])){
 ?></span>
 <button type="button" class="btn btn-outline-success btn-block" data-toggle="modal" data-target="#caduso">
   CADASTRAR
-</button>	
+</button>
+<div id='tab_uss'>
 <span id='retorno_res'></span>
+</div>
 
 <!-- Modal de confirmação de exclusão -->
 <div class="modal fade" id="excl_usuario" tabindex="-1" role="dialog" aria-hidden="true">
