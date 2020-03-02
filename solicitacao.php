@@ -27,6 +27,7 @@ if(empty($vsolir[0]['id'])){
   $env = $pdo->prepare("INSERT INTO mensa SET soli = '$soli',setor = '$setor',solicitacao = '$solicitacao',obv='$obs',destino='$destino',sts='$sts',a_nome = '',msg_d='',vr ='$vr',data = '$data',urg = '$urg'");
   if($env->execute()){
     header("Location:tela_inicial.php");
+    $_SESSION['ifon']="<script>alert('Solitação enviada com sucesso!')</script>";
   }else{
     header("Location:tela_inicial.php");
     $_SESSION['ifon']="<script>alert('Falha ao tentar enviar')</script>";

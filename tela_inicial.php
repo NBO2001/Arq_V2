@@ -52,7 +52,7 @@ include_once 'ConAL.php';
      $nun_msg = 0;
    }
  }else{
-   $usuario = $_SESSION['usuarioname'];
+   $usuario = $_SESSION['id'];
    $result_usuarioa = "SELECT vr,count(vr) FROM mensa WHERE soli LIKE '$usuario' AND vr = 1 ORDER BY vr";
    $resultado_usuarioa = mysqli_query($conn, $result_usuarioa);
    $row_usuarioa = mysqli_fetch_assoc($resultado_usuarioa);

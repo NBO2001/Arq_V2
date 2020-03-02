@@ -5,7 +5,7 @@ if($_SESSION['acesso'] == ""){
   die;
 }
 include_once "ConAL.php";
-$nomeus = $_SESSION['usuarioname'];
+$nomeus = $_SESSION['id'];
 $result_usuario = "SELECT * FROM mensa WHERE soli LIKE '$nomeus' AND vr = 1";
 $resultado_usuario = mysqli_query($conn, $result_usuario);
 
@@ -62,12 +62,9 @@ if($_COOKIE["tema"] <> "a"){
 $a_id= $row_usuario['id'];
 $a_nome= $row_usuario['a_nome'];
 $solicitacao = $row_usuario['solicitacao'];
-$solicitacao = explode('.',$solicitacao);
-$idd = $solicitacao[1];
 
-$solicitacao = $solicitacao[0];
 $msg_d= $row_usuario['msg_d'];
-$kval = $idd.'-'.$a_id;
+$kval = $solicitacao.'-'.$a_id;
 echo "<a href='redir_mesn.php?texto=$kval' > <p >De: $a_nome <br>A respeito da solicitação: $solicitacao <-- aqui para abrir<br>Resposta: $msg_d</p></a>";
 
 }

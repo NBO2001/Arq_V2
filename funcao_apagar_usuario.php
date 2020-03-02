@@ -13,8 +13,4 @@ $veri_db  =$pdo->prepare("DELETE FROM log WHERE id LIKE $id_apagar");
 $veri_db->execute();
 echo "<div class='alert alert-success' role='alert'>Usuário apagado com sucesso!!!</div>";
 }
-
-
-
-
 ?>
