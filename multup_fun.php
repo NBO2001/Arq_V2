@@ -58,7 +58,7 @@ echo "Pasta $dire nao existe";
          echo "INSERT INTO Ko SET nome = '$complemento',imagem = '$id',nome_pdf='$nomedocumento',
               tipo_doc='$class_N',ano_doc='$ano',data_inserido='$data_atual',can='$caminho',fase_con='$fase_corrente',fase_in='$fase_intermediaria',
               destin_fin='$destino_final',ano_ex='0',usuarioname='$usuarioname',class_doc='$tipodoc'";
-         /*
+         
             if (move_uploaded_file($arquivo['tmp_name'][$controle], $destino)) {
               $ise = $pdo->prepare("INSERT INTO Ko SET nome = '$complemento',imagem = '$id',nome_pdf='$nomedocumento',
               tipo_doc='$class_N',ano_doc='$ano',data_inserido='$data_atual',can='$caminho',fase_con='$fase_corrente',fase_in='$fase_intermediaria',
@@ -68,7 +68,7 @@ echo "Pasta $dire nao existe";
             $al_ms = $procura_al_resul[0]['Num_mat']." -> ". $procura_al_resul[0]['Nome_civil']." -> ".$procura_al_resul[0]['Nome_cur'];
             $magemfinal .="<p><a href='pg_res_pes_mat.php?alid=$id' target='_blank'>$al_ms</a>
             <a href='pdf_visu.php?id=$ult_registro' target='_blank'>Aperte para visualizar o pdf</a></p>";
-          }*/
+          }
         }else{
           $magemfinal .="<p>A matricula -> ".$numero[0]." tem mais de um resultado ou nenhum, portanto é impossível</p>";
         }
@@ -79,7 +79,7 @@ echo "Pasta $dire nao existe";
       
     }
     $_SESSION['stuup']= $magemfinal;
-  //  header("Location:multup.php");
+  header("Location:multup.php");
   }
 
 }
