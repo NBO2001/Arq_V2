@@ -109,7 +109,7 @@ if(isset($_COOKIE["tema"])){
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">CONFIRMAÇÃO</h5>
+        <h5 class="modal-title" >CONFIRMAÇÃO</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -128,7 +128,7 @@ if(isset($_COOKIE["tema"])){
 <div id='tab_solis'>
 <span id='tabela_msg'></span>
 </div>
-<button style="position:absolute;left:10%;top:560px;width:900px;" class="btn btn-primary" onclick="window.location.href='tela_inicial.php'">Voltar</button><br><br>
+<button style="position:absolute;left:5%;top:560px;width:90%;" class="btn btn-primary" onclick="window.location.href='tela_inicial.php'">Voltar</button><br><br>
 
 </body>
 <script>
