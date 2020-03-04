@@ -34,6 +34,15 @@ $pqp = $pdo->prepare("SELECT * FROM log ORDER BY acesso DESC, setor ASC, nome AS
 $pqp->execute();
 $pqp_resultado = $pqp->fetchAll(PDO::FETCH_ASSOC);
     foreach($pqp_resultado as $item){
+      if($item['acesso']==0){
+          $btn = "<button type='button' class='btn btn-warning atvconta' id = ".$item['id']."  data-toggle='modal'>
+          Ativar conta
+      </button>";
+      }else{
+        $btn = "<button type='button' class='btn btn-outline-danger view_data2' id = ".$item['id']."  data-toggle='modal'>
+        Desativar conta
+    </button>";
+      }
         $table.= "<tr>
                 <th scope='row'>".$item['nome']."</th>
                <td>".$item['setor']."</td>
@@ -44,10 +53,8 @@ $pqp_resultado = $pqp->fetchAll(PDO::FETCH_ASSOC);
                   </button>
                 </td>
                 <td>
-                <button type='button' class='btn btn-outline-danger view_data2' id = ".$item['id']."  data-toggle='modal'>
-                    Apagar
-                  </button>
-                </td>
+                  $btn 
+                  </td>
                </tr>";
     }
 $table .="</tbody>

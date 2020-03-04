@@ -8,9 +8,12 @@ if($_SESSION['acesso'] <> 4){
 $id_apagar = $_POST['id_para_apagar'];
 
 if(isset($id_apagar)){
- 
-$veri_db  =$pdo->prepare("DELETE FROM log WHERE id LIKE $id_apagar");
-$veri_db->execute();
-echo "<div class='alert alert-success' role='alert'>Usuário apagado com sucesso!!!</div>";
+$atualizar  = $pdo->prepare("UPDATE log SET acesso = '0' WHERE log.id =".$id_apagar);
+if($atualizar->execute()){
+  echo "<div class='alert alert-success' role='alert'>Usuário desativado com sucesso!!!</div>";
+}else{
+  echo "<div class='alert alert-danger' role='alert'>Falhaaaa!!!</div>";
+}
+
 }
 ?>

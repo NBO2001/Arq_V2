@@ -13,13 +13,19 @@ if(isset($btn)){
   $resulta = $pdo->prepare("SELECT * FROM log WHERE ursu LIKE '$usuario_name' AND senha LIKE '$senha_uso'");
   $resulta->execute();
   $valorfin = $resulta->fetchALL(PDO::FETCH_ASSOC);
+  $acesso_nivel = $valorfin[0]['acesso'];
+
   $id = $valorfin[0]['id'];
   $loginban = strtoupper($valorfin[0]['ursu']);
   $senhaban = $valorfin[0]['senha'];
-  $acesso_nivel = $valorfin[0]['acesso'];
   $setoruso= $valorfin[0]['setor'];
 
   if($usuario_name == $loginban && $senha_uso == $senhaban){
+      if($acesso_nivel == 0){
+      $_SESSION['ifon']="<script>alert('Conta desativada, entre em contato com o arquivo')</script>";
+      header("Location:index.php");
+      die;
+      }
         $_SESSION['id'] = $id;
         $_SESSION['usuarioname'] = $loginban;
         $_SESSION['acesso'] = $acesso_nivel;

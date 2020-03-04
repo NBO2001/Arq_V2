@@ -92,7 +92,7 @@ if($_COOKIE["tema"] <> "a"){
  </html>
  <?php
 if(isset($_POST['enviaou'])){
-  $Query = "SELECT  * FROM Alunos WHERE ";
+ 
   $condicao = $_POST['cond'];
   $valor = $_POST['query'];
   if ($condicao == "Igual" ){
@@ -127,7 +127,7 @@ echo $curso;
 
 
 
-  $query = $Query.$ano_pesquisa.$curso.$fi.$fev.$sistema;
+  $query = $ano_pesquisa.$curso.$fi.$fev.$sistema;
   $_SESSION['query'] = $query;
  header("Location:gerado_de_etiquetas.php");
 }

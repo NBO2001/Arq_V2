@@ -12,6 +12,15 @@ $veri_db  =$pdo->prepare("SELECT * FROM log WHERE id LIKE $id_de_pesquisa LIMIT 
 $veri_db->execute();
 $resu_veri_db = $veri_db->fetchAll(PDO::FETCH_ASSOC);
 
+if($resu_veri_db[0]['acesso']==0){
+       $btn = "<button type='button' class='btn btn-warning btn-block atvconta' id = ".$resu_veri_db[0]['id']."  data-toggle='modal'>
+       Ativar conta
+   </button>";
+   }else{
+     $btn = "<button type='button' class='btn btn-outline-danger btn-block view_data2' id = ".$resu_veri_db[0]['id']."  data-toggle='modal'>
+     Desativar conta
+ </button>";
+   }
 
 echo  "<div class='form-group'>
 
@@ -46,7 +55,8 @@ echo  "<div class='form-group'>
 
 </div>
 <button type='button' class='btn btn-success btn-block butaoalterar' id = ".$resu_veri_db[0]['id'].">Alterar</button>
-<button type='button' class='btn btn-outline-danger btn-block view_data2' id = ".$resu_veri_db[0]['id']." data-toggle='modal'>Apagar</button>";
+
+$btn";
 
 }
 

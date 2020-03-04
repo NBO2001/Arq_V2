@@ -72,8 +72,28 @@ if(isset($_SESSION['info'])){
 <div id='tab_uss'>
 <span id='retorno_res'></span>
 </div>
+<!-- Modal de confirmação de ativa -->
+<div class="modal fade" id="atv_usuario" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">CONFIRMAÇÃO</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span id="area_ativa"></span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fimm-->
 
-<!-- Modal de confirmação de exclusão -->
+<!-- Modal de confirmação de desativa -->
 <div class="modal fade" id="excl_usuario" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -92,7 +112,7 @@ if(isset($_SESSION['info'])){
     </div>
   </div>
 </div>
-
+<!-- Fimm-->
 
 
 <!-- Modal cadastrar -->
@@ -253,10 +273,34 @@ if(isset($_SESSION['info'])){
         $(document).on('click','.view_data2', function (){
             var id_registro = $(this).attr('id');
             $('#detalhes').modal('hide');
-            $('#area_apagar').html("<label>Deseja apagar registo? </label></br><button type='button' class='btn btn-outline-danger apg_conf' id='"+ id_registro +" ' data-toggle='modal'>Apagar</button>");
+            $('#area_apagar').html("<label>Deseja desativar a conta? </label></br><button type='button' class='btn btn-danger btn-block  apg_conf' id='"+ id_registro +" ' data-toggle='modal'>Desativar conta</button>");
             $('#excl_usuario').modal('show');
 
         });
+        
+        $(document).on('click', '.atv_conf', function(){
+          var id_para_ativar = $(this).attr('id');
+          var reg_ap = {
+            id_para_ativar : id_para_ativar
+            };
+
+          $.post('funcao_ativar_usuario.php',reg_ap, function(retorna){
+              $('#msg').html(retorna);
+              $('#atv_usuario').modal('hide');
+              paginacao();
+          });
+            
+        });
+        
+        $(document).on('click','.atvconta', function (){
+            var id_registro = $(this).attr('id');
+            $('#detalhes').modal('hide');
+            $('#area_ativa').html("<label>Deseja Ativar a conta? </label></br><button type='button' class='btn btn-warning btn-block  atv_conf' id='"+ id_registro +" ' data-toggle='modal'>Ativar conta</button>");
+            $('#atv_usuario').modal('show');
+
+        });
+
+
         $(document).on('click','.butaoalterar',function(){
           
           var id_alteracao = $(this).attr('id');
