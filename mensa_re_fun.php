@@ -6,7 +6,7 @@ if($_SESSION['acesso'] == ""){
 }
 require_once 'Conec_PDO.php';
 include_once 'envia_email/en_email.php';
-$nome = $_SESSION['usuarioname'];
+$nome = $_SESSION['id'];
 $id_soli =  $_POST['passau_id'];
 $msg = $_POST['msg'];
 
@@ -23,6 +23,14 @@ if($urg_ativa[0]['urg'] == 1){
   $solicitacao_pasta = $solicitacao_pasta[0]['Cod_cur']." - ".$solicitacao_pasta[0]['Num_mat'];
   //Fimm Encontra a o aluno
   
+    //Encontra a o quem repos
+    $nome_exe = $pdo->prepare("SELECT ursu FROM log WHERE id LIKE '$nome'");
+    $nome_exe->execute();
+    $nome_exe = $nome_exe->fetchAll(PDO::FETCH_ASSOC);
+    $nome = $nome_exe[0]['ursu'];
+    //FIMM Encontra a o  quem repos
+
+
   //Encontra a o email usuario
   $solicitante = $urg_ativa[0]['soli'];
   $urg_sativa = $pdo->prepare("SELECT * FROM log WHERE id LIKE '$solicitante'");

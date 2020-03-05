@@ -12,6 +12,12 @@ include_once 'ConAL.php';
  <!DOCTYPE html>
  <html lang="pt-br">
  <head>
+   <!--Boostrap -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js" ></script>
+   <!--FIM Boostrap -->
    <meta charset="utf=8">
    <meta http-equiv="refresh" content="120">
    <title>Tela inicial</title>
@@ -27,21 +33,9 @@ include_once 'ConAL.php';
      echo "<link rel='stylesheet' type='text/css' href='css/$tema.css'>";
    }
    ?>
-   <script type="text/javascript">
-  function ajax(){
-    var req = new XMLHttpRequest();
-    req.onreadystatechange = function(){
-      if(req.readyState == 4 && req.status == 200){
-         document.getElementById('chat').innerHTML = req.responseText;
-      }
-    }
-    req.open('GET','chat.php',true);
-    req.send();
-  }
-  setInterval(function(){ajax();},1000);
-   </script>
+  
  </head>
- <body onload="ajax();" id="pgini1">
+ <body id="pgini1">
 
  <?php if($_SESSION['acesso']>=2 && $_SESSION['acesso'] < 5){
    $result_usuarioa = "SELECT sts,count(sts) FROM mensa WHERE sts LIKE '1' GROUP BY sts";
@@ -51,19 +45,10 @@ include_once 'ConAL.php';
    if ($nun_msg == ""){
      $nun_msg = 0;
    }
- }else{
-   $usuario = $_SESSION['id'];
-   $result_usuarioa = "SELECT vr,count(vr) FROM mensa WHERE soli LIKE '$usuario' AND vr = 1 ORDER BY vr";
-   $resultado_usuarioa = mysqli_query($conn, $result_usuarioa);
-   $row_usuarioa = mysqli_fetch_assoc($resultado_usuarioa);
-   $nun_msg = $row_usuarioa['count(vr)'];
-   if ($nun_msg == ""){
-     $nun_msg = 0;
-   }
  }
-
  ?>
  <div id="logoufam" >
+ 
  <label for="chec">
  <img width="100px" height="90px" src="ufam.png"/>
  </label>
@@ -93,7 +78,28 @@ include_once 'ConAL.php';
      </ul>
  </nav>
  </div>
+ <?php
+if($_SESSION['acesso']==1){
+  ?>
+   <span id='mgs_solis'></span>
 
+   <script>
+     
+    $(document).ready(function (){
+       vrmsg();
+    });
+
+    function vrmsg(){
+        $.post('funcao_msg_de_solicita.php', function(retorna){
+            $('#mgs_solis').html(retorna);
+        });
+    }
+
+   </script>
+  <?php  
+
+
+ }?>
  <div id="tela_inicial_tes" >
 <!-- <button class="bntv1" id="btntest" onclick="window.location.href='pg_pesquisa.php'">Pesquisa por matrícula</button><br><br>-->
 
@@ -111,12 +117,7 @@ include_once 'ConAL.php';
   <input name="pesqui" type="submit" value="Buscar">
 </form><br>
 
- <?php
-if($_SESSION['acesso']==1){
-   echo"<form  action='mensa_visu.php'>
-    <button class='bntv1' id='btntest4'>Mensagem[$nun_msg]</button>
-   </form><br>";
- }
+<?php
 if ($_SESSION['acesso']>=2){
 $fun = "window.location.href='cor_etq.php'";
  echo "<button class='bntv1' onclick=".$fun.">Pesquisar curso</button><br><br>";
@@ -133,16 +134,7 @@ $fun = "window.location.href='cor_etq.php'";
  </div>
  <?php
  if($_SESSION['acesso']<>1){
- echo "<div id='chat_campo'><div  id='chat'>
 
- </div>
- <div>
-   <form id='campo' method='POST' action='envianochat.php'>
-   <input type='text' name='msg' placeholder='Escreva a mensagen' autocomplete='off' required>
-   <input type='submit' value='Enviar'>
-   </form>
- </div>
- </div>";
  }
  ?>
  </body>

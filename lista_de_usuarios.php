@@ -14,7 +14,7 @@ if($_SESSION['acesso'] <> 4){
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/jquery.mask.min.js"/></script>
+    <script type="text/javascript" src="js/jquery.mask.min.js"></script>
    <link rel="stylesheet" type="text/css" href="css/es.css">
    <link type='image/x-icon' rel='shortcut icon' href='icones/ufamicon.ico'>
    <?php
