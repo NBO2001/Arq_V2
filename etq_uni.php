@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 include_once 'Conec_PDO.php';
 if(isset($_GET['alid'])){
@@ -105,9 +106,10 @@ $tabela ="<table><tbody>".$tabela."</tbody></table>";
       $html .= "$tabela";
       $html .= "\t</body>\n";
       $html .= "</html>\n";
+echo  $html;
 
 
-
+/*
  $arquivo = "Etiqueta.html";
  // Configurações header para forçar o download
 file_put_contents($arquivo, $html);
@@ -130,6 +132,6 @@ header('Expires: 0');
 readfile($arquivo);
 exit;
 header("Location:pg_res_pes_mat.php");
-
+*/
 
 ?>
